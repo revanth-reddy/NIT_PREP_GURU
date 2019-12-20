@@ -18,7 +18,7 @@ export default class App extends React.Component {
     },
     {
       key: 'Prep',
-      icon: 'books',
+      icon: 'library-books',
       label: 'Prep',
       barColor: '#B71C1C',
       pressColor: 'rgba(255, 255, 255, 0.16)'
