@@ -7,13 +7,6 @@ import HomeScreen from './screens/Home';
 import PrepScreen from './screens/Prep';
 import SettingsScreen from './screens/settings';
 
-const styles = StyleSheet.create({  
-    container: {  
-        flex: 1,  
-        justifyContent: 'center',  
-        alignItems: 'center'  
-    },  
-});  
 const TabNavigator = createMaterialBottomTabNavigator(  
     {  
         Home: { screen: HomeScreen,  
