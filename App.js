@@ -1,67 +1,61 @@
-import React from 'react'
-import { View, StyleSheet, Image, Text } from 'react-native'
+import React from 'react';  
+import {StyleSheet, Text, View,Button} from 'react-native';  
+import { createBottomTabNavigator, createAppContainer} from 'react-navigation';  
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';  
+import Icon from 'react-native-vector-icons/MaterialIcons'; 
+import HomeScreen from './screens/Home';
+import PrepScreen from './screens/Prep';
+import SettingsScreen from './screens/settings';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import ShiftingTab, {
-  FullTab
-} from 'react-native-material-bottom-navigation';
-
-export default class App extends React.Component {
-  tabs = [
-    {
-      key: 'Home',
-      icon: 'home',
-      label: 'Home',
-      barColor: '#388E3C',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
-    },
-    {
-      key: 'Prep',
-      icon: 'library-books',
-      label: 'Prep',
-      barColor: '#B71C1C',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
-    },
-    {
-      key: 'Settings',
-      icon: 'settings',
-      label: 'Settings',
-      barColor: '#E64A19',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
-    }
-  ]
-
-  state = {
-    activeTab: 'Home'
-  }
-
-  renderIcon = icon => ({ isActive }) => (
-    <Icon size={24} color="white" name={icon} />
-  )
-
-  renderTab = ({ tab, isActive }) => (
-    <FullTab
-      isActive={isActive}
-      key={tab.key}
-      label={tab.label}
-      renderIcon={this.renderIcon(tab.icon)}
-    />
-  )
-
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}>
-          <Text>Hello !</Text>
-        </View>
-        <ShiftingTab
-          activeTab={this.state.activeTab}
-          onTabPress={newTab => this.setState({ activeTab: newTab.key })}
-          renderTab={this.renderTab}
-          tabs={this.tabs}
-        />
-      </View>
-    )
-  }
-}
+const styles = StyleSheet.create({  
+    container: {  
+        flex: 1,  
+        justifyContent: 'center',  
+        alignItems: 'center'  
+    },  
+});  
+const TabNavigator = createMaterialBottomTabNavigator(  
+    {  
+        Home: { screen: HomeScreen,  
+            navigationOptions:{  
+                tabBarLabel:'Home',  
+                tabBarIcon: ({ tintColor }) => (  
+                    <View>  
+                        <Icon style={[{color: tintColor}]} size={25} name={'home'}/>  
+                    </View>),  
+            }  
+        },  
+        Prep: { screen: PrepScreen,  
+            navigationOptions:{  
+                tabBarLabel:'Prep',  
+                tabBarIcon: ({ tintColor }) => (  
+                    <View>  
+                        <Icon style={[{color: tintColor}]} size={25} name={'library-books'}/>  
+                    </View>),  
+                activeColor: 'white',  
+                inactiveColor: '#018383',  
+                barStyle: { backgroundColor: '#8bbabb' },  
+            }  
+        },  
+        Settings: { screen: SettingsScreen,  
+            navigationOptions:{  
+                tabBarLabel:'Settings',  
+                tabBarIcon: ({ tintColor }) => (  
+                    <View>  
+                        <Icon style={[{color: tintColor}]} size={25} name={'settings'}/>  
+                    </View>),  
+                activeColor: 'white',  
+                inactiveColor: '#018383',  
+                barStyle: { backgroundColor: '#02a8a8' },  
+            }  
+        },   
+    },  
+    {  
+      initialRouteName: "Home",  
+      activeColor: 'white',  
+      inactiveColor: '#226557',  
+      barStyle: { backgroundColor: '#3BAD87' },  
+    },  
+);  
+  
+export default createAppContainer(TabNavigator);  

@@ -1,15 +1,15 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-class HomeScreen extends React.Component {  
+class PrepScreen extends React.Component {  
   render() {  
     return (  
         <View style={styles.container}>  
-          <Text>Home Screen heyy</Text>  
+          <Text>Profile Screen</Text>  
         </View>  
     );  
   }  
-} 
+}  
 
 const styles = StyleSheet.create({  
   container: {  
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
   },  
 }); 
 
-export default HomeScreen;
+export default PrepScreen;
