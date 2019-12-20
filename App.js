@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Image, Text } from 'react-native'
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import ShiftingTab, {
   FullTab
@@ -10,30 +10,30 @@ import ShiftingTab, {
 export default class App extends React.Component {
   tabs = [
     {
-      key: 'games',
+      key: 'Home',
       icon: 'home',
-      label: 'Games',
+      label: 'Home',
       barColor: '#388E3C',
       pressColor: 'rgba(255, 255, 255, 0.16)'
     },
     {
-      key: 'movies-tv',
-      icon: 'movie',
-      label: 'Movies & TV',
+      key: 'Prep',
+      icon: 'books',
+      label: 'Prep',
       barColor: '#B71C1C',
       pressColor: 'rgba(255, 255, 255, 0.16)'
     },
     {
-      key: 'music',
-      icon: 'music-note',
-      label: 'Music',
+      key: 'Settings',
+      icon: 'settings',
+      label: 'Settings',
       barColor: '#E64A19',
       pressColor: 'rgba(255, 255, 255, 0.16)'
     }
   ]
 
   state = {
-    activeTab: 'games'
+    activeTab: 'Home'
   }
 
   renderIcon = icon => ({ isActive }) => (
