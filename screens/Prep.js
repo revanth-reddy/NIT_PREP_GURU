@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
 class PrepScreen extends React.Component {
+  
   render() {
     return (
       <View style={styles.container}>
