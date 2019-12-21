@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, View, Image, ScrollView} from 'react-native';
-import { Appbar, Banner } from 'react-native-paper';
+import {StyleSheet, View, Text, Image, ScrollView} from 'react-native';
+import { Appbar, Banner, Subheading, Divider } from 'react-native-paper';
 import Carousal from '../components/Carousel.js';
-
+import News from '../components/News';
 
 class HomeScreen extends React.Component {
   state = {
@@ -50,6 +50,10 @@ class HomeScreen extends React.Component {
             Help others by sharing your coding round and interview experiences of FTE and interns.
           </Banner>
         </View>
+        <View style={styles.news}>
+            <Subheading style={{fontWeight: 'bold'}}>Latest News</Subheading>      
+            <News/>
+        </View>
       </ScrollView>
     );
   }
@@ -57,11 +61,14 @@ class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    flex: 1,
     backgroundColor: '#e3f6f5'
   },
+  news: {
+    flex: 1,
+    flexDirection: "column",
+    margin: 20,
+  }
 });
 
 export default HomeScreen;
