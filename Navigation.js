@@ -13,6 +13,7 @@ const navigator = createStackNavigator(
     Login: Login,
     Home: {screen: HomeScreen},
     Help: {screen: HelpScreen},
+    
   },
   {
     intialRouteName: 'SplashScreen',

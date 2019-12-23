@@ -1,3 +1,7 @@
+
+
+
+
 Setup react native environment (  https://facebook.github.io/react-native/docs/getting-started  )
 
 Setup USB debugging of android mobile
