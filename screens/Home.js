@@ -10,6 +10,7 @@ class HomeScreen extends React.Component {
   };
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <ScrollView style={styles.container}>
         <View >
@@ -30,7 +31,7 @@ class HomeScreen extends React.Component {
             actions={[
               {
                 label: 'Contribute',
-                onPress: () => this.setState({ visible: false }),
+                onPress: () => navigate('Help'),
               },
               {
                 label: 'Not Now',
