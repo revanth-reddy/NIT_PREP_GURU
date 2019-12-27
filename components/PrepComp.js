@@ -8,7 +8,7 @@ import {
   Modal,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -33,6 +33,27 @@ export default class PrepComp extends React.Component {
         {
           title: 'Item 5',
         },
+        {
+          title: 'Item 6',
+        },
+        {
+          title: 'Item 7',
+        },
+        {
+          title: 'Item 8',
+        },
+        {
+          title: 'Item 9',
+        },
+        {
+          title: 'Item 10',
+        },
+        {
+          title: 'Item 11',
+        },
+        {
+          title: 'Item 12',
+        },
       ],
     };
   }
@@ -45,9 +66,7 @@ export default class PrepComp extends React.Component {
           onPress={() => {
             this.setState({modalVisible: true});
           }}>
-          <Text style={{fontSize: 20}}>Date: </Text>
-          <Text style={{fontSize: 20}}>Description :</Text>
-          <Text style={{fontSize: 20}}>{item.title}</Text>
+          <Text style={{fontSize: 45}}>Company</Text>
         </TouchableOpacity>
       </View>
     );
@@ -56,7 +75,7 @@ export default class PrepComp extends React.Component {
   render() {
     console.log(this.props);
     return (
-      <View>
+      <View style={styles.container}>
         <Modal
           animationType="fade"
           visible={this.state.modalVisible}
@@ -67,15 +86,14 @@ export default class PrepComp extends React.Component {
             <Text>{this.props.date}</Text>
           </ScrollView>
         </Modal>
-        <Text style={{fontSize: 25, marginTop: 15, paddingLeft: 10}}>
-          {this.props.company} :{' '}
-        </Text>
         <Carousel
           ref={ref => (this.carousel = ref)}
           data={this.state.carouseItems}
           sliderWidth={screenWidth}
-          sliderHeight={screenHeight / 4}
+          sliderHeight={screenHeight / 2 + 150}
           itemWidth={screenWidth - 60}
+          vertical={true}
+          itemHeight={screenHeight / 4}
           renderItem={this._renderItem.bind(this)}
         />
         <View />
@@ -86,12 +104,17 @@ export default class PrepComp extends React.Component {
 
 const styles = StyleSheet.create({
   card: {
-    width: screenWidth,
+    width: screenWidth * 0.8,
     height: screenHeight / 4,
-    backgroundColor: '#6AA6F3',
-    marginTop: 15,
+    backgroundColor: '#3BAD87',
     borderRadius: 25,
     padding: 15,
-    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

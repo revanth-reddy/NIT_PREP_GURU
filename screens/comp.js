@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {StyleSheet, View, Picker, ScrollView, Alert, Text} from 'react-native';
-import { Container, Header, Content, Tab, Tabs } from 'native-base';
-import { Surface, Appbar, TextInput, Button, Headline,} from 'react-native-paper';
-import { yellow } from 'ansi-colors';
+import {Container, Header, Content, Tab, Tabs} from 'native-base';
+import {Surface, Appbar, TextInput, Button, Headline} from 'react-native-paper';
+import {yellow} from 'ansi-colors';
+import PrepComp from '../components/PrepComp';
 
 export default class CompScreen extends Component {
   render() {
@@ -10,20 +11,24 @@ export default class CompScreen extends Component {
     return (
       <Container>
         <Appbar.Header style={{backgroundColor: '#3BAD87'}}>
-                    <Appbar.BackAction
-                    onPress={() => navigate('Home')}
-                    />
-                    <Appbar.Content
-                    title="NIT PREP GURU"
-                    subtitle="The Placement Preparation Tool"
-                    style={{}}
-                    />
+          <Appbar.BackAction onPress={() => navigate('Home')} />
+          <Appbar.Content
+            title="NIT PREP GURU"
+            subtitle="The Placement Preparation Tool"
+            style={{}}
+          />
         </Appbar.Header>
-        <Tabs >
-          <Tab heading="FTE" tabStyle={{ backgroundColor: "#3BAD87" }} activeTabStyle={{ backgroundColor: "#3BAD87" }}>
-            <Text>Tab1</Text>
+        <Tabs locked={true}>
+          <Tab
+            heading="FTE"
+            tabStyle={{backgroundColor: '#3BAD87'}}
+            activeTabStyle={{backgroundColor: '#3BAD87'}}>
+            <PrepComp />
           </Tab>
-          <Tab heading="INTERN" tabStyle={{ backgroundColor: "#3BAD87" }} activeTabStyle={{ backgroundColor: "#3BAD87" }}>
+          <Tab
+            heading="INTERN"
+            tabStyle={{backgroundColor: '#3BAD87'}}
+            activeTabStyle={{backgroundColor: '#3BAD87'}}>
             <Text>Tab2</Text>
           </Tab>
         </Tabs>
