@@ -3120,7 +3120,7 @@ inquirer@^7.0.0:
     strip-ansi "^5.1.0"
     through "^2.3.6"
 
-invariant@^2.2.4:
+invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -5175,6 +5175,11 @@ react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
 
+react-native-app-intro-slider@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-app-intro-slider/-/react-native-app-intro-slider-3.0.0.tgz#c3620b967503ce410b3d767252392bb6fb2edf97"
+  integrity sha512-2XXUYnSeMYZTLhdRYHSwv8mhoyuEaYxmQfXrWQInH1QvjsnJtKgvORI3bJuJN+tNPg3aut6JYYCNOFsI5of32A==
+
 react-native-axios@^0.17.1:
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/react-native-axios/-/react-native-axios-0.17.1.tgz#44292950aa07ceee2e4bd349106ff773bef81f8f"
@@ -5191,6 +5196,13 @@ react-native-gesture-handler@^1.5.2:
     hoist-non-react-statics "^2.3.1"
     invariant "^2.2.4"
     prop-types "^15.7.2"
+
+react-native-onesignal@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-3.6.1.tgz#301a5849ee3bab2e297980d8aa293a61263e038e"
+  integrity sha512-2Ci0xZhk4mpt+UpeCyz++VV31DisBMR0GpOzfBGk67AZyN+BNOY50Nhr11f4mQFO+un7i/18I2hpjAF//gYdvg==
+  dependencies:
+    invariant "^2.2.2"
 
 react-native-paper@^3.4.0:
   version "3.4.0"

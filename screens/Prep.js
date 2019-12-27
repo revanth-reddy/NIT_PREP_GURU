@@ -1,13 +1,28 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  ScrollView,
+  StatusBar,
+} from 'react-native';
+import PrepComp from '../components/PrepComp';
 
-class PrepScreen extends React.Component {
-  
+const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
+
+class Prep extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Profile Screen</Text>
-      </View>
+      <ScrollView>
+        <StatusBar backgroundColor="#3B3B3B" />
+        <View style={styles.container}>
+          <View style={{width: screenWidth}}>
+            <PrepComp company="Company" desc="Description" date="Date" />
+            <PrepComp />
+            <PrepComp />
+          </View>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -20,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PrepScreen;
+export default Prep;

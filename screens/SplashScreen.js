@@ -16,8 +16,7 @@ export default class SplashScreen extends Component {
         <ActivityIndicator size="large" color="#455A64" />
       </View>
     );
-  }
-  l;
+  };
 }
 
 const styles = StyleSheet.create({

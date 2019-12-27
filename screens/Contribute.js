@@ -12,18 +12,32 @@ class HelpScreen extends React.Component {
         exp: '',
         problem: '',
         hide: true,
+        accept: false,
         };
 
     display = () => {
-        Alert.alert(
-            'Thank You',
-            'Many thanks for contributing !!!, We are processing your information and it will be on app shortly.',
-            [
-              {text: 'Cool ✌️️', onPress: () => this.props.navigation.navigate('Home')},
-            ],
-            {cancelable: false},
-        );
-        
+        if(this.state.company!='' & this.state.job!='' & this.state.year!='' & this.state.type!='' & this.state.exp!='')
+        {
+            Alert.alert(
+                'Thank You',
+                'Many thanks for contributing !!!, We are processing your information and it will be on app shortly.',
+                [
+                {text: 'Cool ✌️️', onPress: () => this.props.navigation.navigate('Home')},
+                ],
+                {cancelable: false},
+            );
+        }
+        else
+        {
+            Alert.alert(
+                'Uh-Ooh !',
+                'Kindly fill all the details in the form ',
+                [
+                {text: 'Sure ✌️️', onPress: () => console.log('refill !')},
+                ],
+                {cancelable: false},
+            );
+        }
     };
     
 
