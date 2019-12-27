@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import HomeScreen from './screens/Home';
 import PrepScreen from './screens/Prep';
 import SettingsScreen from './screens/settings';
+import CompScreen from './screens/comp';
 
 const TabNavigator = createMaterialBottomTabNavigator(
   {
@@ -21,7 +22,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
       },
     },
     Prep: {
-      screen: PrepScreen,
+      screen: CompScreen,
       navigationOptions: {
         tabBarLabel: 'Prep',
         tabBarIcon: ({tintColor}) => (

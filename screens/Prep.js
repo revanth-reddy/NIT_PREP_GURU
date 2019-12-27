@@ -16,7 +16,7 @@ class Prep extends React.Component {
       <ScrollView>
         <StatusBar backgroundColor="#3B3B3B" />
         <View style={styles.container}>
-          <View style={{width: screenWidth}}>
+          <View style={{width: screenWidth,height: screenHeight+10}}>
             <PrepComp company="Company" desc="Description" date="Date" />
             <PrepComp />
             <PrepComp />
