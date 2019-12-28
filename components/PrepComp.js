@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import {withNavigation} from 'react-navigation';
-import axios from "react-native-axios";
+import axios from 'react-native-axios';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -25,29 +25,29 @@ class PrepComp extends React.Component {
   }
   componentDidMount() {
     axios({
-      method: "get",
-      url: "http://52.66.210.173/companies/",
+      method: 'get',
+      url: 'http://52.66.210.173/companies/',
       auth: {
-        username: "admin",
-        password: "admin123"
-      }
+        username: 'admin',
+        password: 'admin123',
+      },
     })
-    .then(response => {
-      let ob = [];
-      for (let comp of response.data) {
-        ob.push({
-          company: comp.name,
+      .then(response => {
+        let ob = [];
+        for (let comp of response.data) {
+          ob.push({
+            company: comp.name,
+          });
+        }
+        // console.log(ob);
+        this.setState({
+          isLoading: false,
+          dataSource: ob,
         });
-      }
-      // console.log(ob);
-      this.setState({
-        isLoading: false,
-        dataSource: ob
+      })
+      .catch(error => {
+        console.error('hello - ' + error);
       });
-    })
-    .catch(error => {
-      console.error("hello - " + error);
-    });
   }
 
   _renderItem({item, index}) {

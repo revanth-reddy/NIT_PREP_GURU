@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {FlatGrid} from 'react-native-super-grid';
 
-export default class Fte extends Component {
+export default class Intern extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,11 +46,7 @@ export default class Fte extends Component {
         // spacing={20}
         renderItem={({item, index}) => (
           <TouchableOpacity
-            onPress={() => {
-              this.setState({
-                url: this.state.link + '/Fte',
-              })
-            }}
+            onPress={() => alert(item.date)}
             style={[styles.itemContainer, {backgroundColor: '#34495e'}]}>
             <Text style={styles.itemName}>Date : {item.date}</Text>
             <Text style={styles.itemName}>Description : {item.desc}</Text>
