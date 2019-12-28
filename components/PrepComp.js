@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import {withNavigation} from 'react-navigation';
+import {withNavigation, SafeAreaView} from 'react-navigation';
 import axios from 'react-native-axios';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
@@ -75,7 +75,7 @@ class PrepComp extends React.Component {
     }
     // console.log(this.props);
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Carousel
           ref={ref => (this.carousel = ref)}
           data={this.state.dataSource}
@@ -87,7 +87,7 @@ class PrepComp extends React.Component {
           renderItem={this._renderItem.bind(this)}
         />
         <View />
-      </View>
+      </SafeAreaView>
     );
   }
 }

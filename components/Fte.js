@@ -1,59 +1,85 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import {FlatGrid} from 'react-native-super-grid';
+import axios from 'react-native-axios';
 
 export default class Fte extends Component {
   constructor(props) {
     super(props);
     this.state = {
       url: '',
+      isLoading: true,
+      dataSource: [],
     };
   }
 
+  componentDidMount() {
+    axios({
+      method: 'get',
+      url: `${this.state.url}`,
+      auth: {
+        username: 'admin',
+        password: 'admin123',
+      },
+    })
+      .then(response => {
+        let ob = [];
+        for (let data of response.data) {
+          ob.push({
+            company: data.name,
+            job_title: data.job_title,
+            year: data.year,
+            experience: data.experience,
+            problems: data.problems,
+          });
+        }
+        this.setState({
+          isLoading: false,
+          dataSource: ob,
+        });
+      })
+      .catch(error => {
+        console.error('hello - ' + error);
+      });
+  }
+
   render() {
-    this.state.url = this.props.link;
-    console.log(this.props.url);
-    const items = [
-      {date: '16-10-2019', desc: '#1abc9c'},
-      {date: '1-1-2000', desc: '#2ecc71'},
-      {date: '1-1-2000', desc: '#3498db'},
-      {date: '1-1-2000', desc: '#9b59b6'},
-      {date: '1-1-2000', desc: '#34495e'},
-      {date: '1-1-2000', desc: '#16a085'},
-      {date: '1-1-2000', desc: '#27ae60'},
-      {date: '1-1-2000', desc: '#2980b9'},
-      {date: '1-1-2000', desc: '#8e44ad'},
-      {date: '1-1-2000', desc: '#2c3e50'},
-      {date: '1-1-2000', desc: '#f1c40f'},
-      {date: '1-1-2000', desc: '#e67e22'},
-      {date: '1-1-2000', desc: '#e74c3c'},
-      {date: '1-1-2000', desc: '#ecf0f1'},
-      {date: '1-1-2000', desc: '#95a5a6'},
-      {date: '1-1-2000', desc: '#f39c12'},
-      {date: '1-1-2000', desc: '#d35400'},
-      {date: '1-1-2000', desc: '#c0392b'},
-      {date: '1-1-2000', desc: '#bdc3c7'},
-      {date: '1-1-2000', desc: '#7f8c8d'},
-    ];
+    this.state.url = this.props.url;
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+    if (!this.state.isLoading && this.state.dataSource.length === 0) {
+      return (
+        <View>
+          <Text>No data to show</Text>
+        </View>
+      );
+    }
 
     return (
       <FlatGrid
         itemDimension={130}
-        items={items}
+        items={this.state.dataSource}
         style={styles.gridView}
         // staticDimension={300}
         // fixed
         // spacing={20}
         renderItem={({item, index}) => (
           <TouchableOpacity
-            onPress={() => {
-              this.setState({
-                url: this.state.link + '/Fte',
-              })
-            }}
             style={[styles.itemContainer, {backgroundColor: '#34495e'}]}>
-            <Text style={styles.itemName}>Date : {item.date}</Text>
-            <Text style={styles.itemName}>Description : {item.desc}</Text>
+            <Text style={styles.itemName}>Job Title : {item.job_title}</Text>
+            <Text style={styles.itemName}>Year : {item.year}</Text>
+            <Text style={styles.itemName}>Experience : {item.experience}</Text>
           </TouchableOpacity>
         )}
       />
@@ -68,9 +94,9 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     borderRadius: 10,
-    padding: 10,
+    padding: 20,
     height: 200,
-    elevation: 20,
+    flex: 1,
   },
   itemName: {
     fontSize: 16,
