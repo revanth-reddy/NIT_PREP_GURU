@@ -6,6 +6,8 @@ import Login from './screens/Login';
 import HomeScreen from './screens/Home';
 import HelpScreen from './screens/Contribute';
 import CompScreen from './screens/comp';
+import Exp from './screens/Exp';
+import Prep from './screens/Prep';
 
 const navigator = createStackNavigator(
   {
@@ -15,6 +17,8 @@ const navigator = createStackNavigator(
     Home: {screen: HomeScreen},
     Help: {screen: HelpScreen},
     Comp: {screen: CompScreen},
+    Exp: Exp,
+    Prep: {screen: Prep},
   },
   {
     intialRouteName: 'SplashScreen',

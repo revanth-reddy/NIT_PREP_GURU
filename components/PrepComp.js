@@ -5,92 +5,70 @@ import {
   Text,
   Dimensions,
   TouchableOpacity,
-  Modal,
+  ActivityIndicator,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import {ScrollView} from 'react-native-gesture-handler';
+import {withNavigation} from 'react-navigation';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
-export default class PrepComp extends React.Component {
+class PrepComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modalVisible: false,
-      carouseItems: [
-        {
-          title: 'Item 1',
-        },
-        {
-          title: 'Item 2',
-        },
-        {
-          title: 'Item 3',
-        },
-        {
-          title: 'Item 4',
-        },
-        {
-          title: 'Item 5',
-        },
-        {
-          title: 'Item 6',
-        },
-        {
-          title: 'Item 7',
-        },
-        {
-          title: 'Item 8',
-        },
-        {
-          title: 'Item 9',
-        },
-        {
-          title: 'Item 10',
-        },
-        {
-          title: 'Item 11',
-        },
-        {
-          title: 'Item 12',
-        },
-      ],
+      isLoading: true,
+      index: 0,
     };
+  }
+  componentDidMount() {
+    return fetch('https://facebook.github.io/react-native/movies.json')
+      .then(response => response.json())
+      .then(responseJson => {
+        this.setState(
+          {
+            isLoading: false,
+            dataSource: responseJson.movies,
+          },
+          function() {},
+        );
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   _renderItem({item, index}) {
+    console.log(item.title);
     return (
-      <View style={{}}>
+      <View style={{elevation: 20}}>
         <TouchableOpacity
           style={styles.card}
-          onPress={() => {
-            this.setState({modalVisible: true});
-          }}>
-          <Text style={{fontSize: 45}}>Company</Text>
+          onPress={() =>
+            this.props.navigation.navigate('Comp', {title: item.title})
+          }>
+          <Text style={{fontSize: 30}}>{item.title}</Text>
         </TouchableOpacity>
       </View>
     );
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
     console.log(this.props);
     return (
       <View style={styles.container}>
-        <Modal
-          animationType="fade"
-          visible={this.state.modalVisible}
-          onRequestClose={() => this.setState({modalVisible: false})}>
-          <ScrollView>
-            <Text>{this.props.company}</Text>
-            <Text>{this.props.desc}</Text>
-            <Text>{this.props.date}</Text>
-          </ScrollView>
-        </Modal>
         <Carousel
           ref={ref => (this.carousel = ref)}
-          data={this.state.carouseItems}
+          data={this.state.dataSource}
           sliderWidth={screenWidth}
-          sliderHeight={screenHeight / 2 + 150}
+          sliderHeight={screenHeight * 0.8}
           itemWidth={screenWidth - 60}
           vertical={true}
           itemHeight={screenHeight / 4}
@@ -118,3 +96,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+export default withNavigation(PrepComp);

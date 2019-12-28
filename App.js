@@ -4,9 +4,9 @@ import {createBottomTabNavigator, createAppContainer} from 'react-navigation';
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import HomeScreen from './screens/Home';
-import PrepScreen from './screens/Prep';
 import SettingsScreen from './screens/settings';
 import CompScreen from './screens/comp';
+import Prep from './screens/Prep';
 
 const TabNavigator = createMaterialBottomTabNavigator(
   {
@@ -22,7 +22,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
       },
     },
     Prep: {
-      screen: CompScreen,
+      screen: Prep,
       navigationOptions: {
         tabBarLabel: 'Prep',
         tabBarIcon: ({tintColor}) => (
