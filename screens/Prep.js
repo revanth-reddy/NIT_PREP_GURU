@@ -41,7 +41,7 @@ class Prep extends React.Component {
             height: 50,
             justifyContent: 'center',
           }}>
-          <Text style={{fontSize: 25}}>Comapanies</Text>
+          <Text style={{fontSize: 25}}>Companies</Text>
         </View>
         <ScrollView>
           <View style={styles.container}>

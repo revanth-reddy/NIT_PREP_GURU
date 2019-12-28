@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import {withNavigation} from 'react-navigation';
+import axios from "react-native-axios";
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -19,35 +20,46 @@ class PrepComp extends React.Component {
       modalVisible: false,
       isLoading: true,
       index: 0,
+      dataSource: [],
     };
   }
   componentDidMount() {
-    return fetch('https://facebook.github.io/react-native/movies.json')
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState(
-          {
-            isLoading: false,
-            dataSource: responseJson.movies,
-          },
-          function() {},
-        );
-      })
-      .catch(error => {
-        console.error(error);
+    axios({
+      method: "get",
+      url: "http://52.66.210.173/companies/",
+      auth: {
+        username: "admin",
+        password: "admin123"
+      }
+    })
+    .then(response => {
+      let ob = [];
+      for (let comp of response.data) {
+        ob.push({
+          company: comp.name,
+        });
+      }
+      // console.log(ob);
+      this.setState({
+        isLoading: false,
+        dataSource: ob
       });
+    })
+    .catch(error => {
+      console.error("hello - " + error);
+    });
   }
 
   _renderItem({item, index}) {
-    console.log(item.title);
+    // console.log(item.company);
     return (
       <View style={{elevation: 20}}>
         <TouchableOpacity
           style={styles.card}
           onPress={() =>
-            this.props.navigation.navigate('Comp', {title: item.title})
+            this.props.navigation.navigate('Comp', {title: item.company})
           }>
-          <Text style={{fontSize: 30}}>{item.title}</Text>
+          <Text style={{fontSize: 30}}>{item.company}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -61,7 +73,7 @@ class PrepComp extends React.Component {
         </View>
       );
     }
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <View style={styles.container}>
         <Carousel
