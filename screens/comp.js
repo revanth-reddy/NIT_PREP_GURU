@@ -3,10 +3,14 @@ import {StyleSheet, View, Picker, ScrollView, Alert, Text} from 'react-native';
 import {Container, Header, Content, Tab, Tabs} from 'native-base';
 import {Surface, Appbar, TextInput, Button, Headline} from 'react-native-paper';
 import {yellow} from 'ansi-colors';
+import Fte from '../components/Fte';
 
 export default class CompScreen extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      url: '',
+    };
   }
 
   render() {
@@ -15,19 +19,20 @@ export default class CompScreen extends Component {
     const company = JSON.parse(
       JSON.stringify(navigation.getParam('title', '')),
     );
-    console.log(company);
+    this.state.url = 'Hello' + company;
+    console.log(this.state.url);
     return (
       <Container>
         <Appbar.Header style={{backgroundColor: '#3BAD87'}}>
           <Appbar.BackAction onPress={() => navigate('Prep')} />
           <Appbar.Content title={company} style={{}} />
         </Appbar.Header>
-        <Tabs locked={true}>
+        <Tabs>
           <Tab
             heading="FTE"
             tabStyle={{backgroundColor: '#3BAD87'}}
             activeTabStyle={{backgroundColor: '#3BAD87'}}>
-            <Text>Tab1</Text>
+            <Fte />
           </Tab>
           <Tab
             heading="INTERN"
