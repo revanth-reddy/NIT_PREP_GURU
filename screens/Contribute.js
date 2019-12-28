@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Picker, ScrollView, Alert} from 'react-native';
 import { Surface, Appbar, TextInput, Button, Headline,} from 'react-native-paper';
-// import { ScrollView } from 'react-native-gesture-handler';
+import axios from 'react-native-axios';
 
 class HelpScreen extends React.Component {
     state = {
@@ -18,6 +18,29 @@ class HelpScreen extends React.Component {
     display = () => {
         if(this.state.company!='' & this.state.job!='' & this.state.year!='' & this.state.type!='' & this.state.exp!='')
         {
+            axios({
+                method: 'post',
+                url: `http://52.66.210.173/exp/`,
+                data: {
+                  name: this.state.company,
+                  job_title: this.state.job,
+                  year: this.state.year,
+                  placement: this.state.type,
+                  experience: this.state.exp,
+                  problems: this.state.problem,
+                },
+                auth: {
+                  username: 'admin',
+                  password: 'admin123',
+                },
+              })
+                .then(function(response) {
+                  console.log(response);
+                })
+                .catch(function(error) {
+                  console.log(error);
+                });
+
             Alert.alert(
                 'Thank You',
                 'Many thanks for contributing !!!, We are processing your information and it will be on app shortly.',
