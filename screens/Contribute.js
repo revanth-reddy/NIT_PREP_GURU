@@ -79,7 +79,7 @@ class HelpScreen extends React.Component {
                     onPress={() => navigate('Home')}
                     />
                     <Appbar.Content
-                    title="NIT PREP GURU"
+                    title="Dronacharya"
                     subtitle="The Placement Preparation Tool"
                     style={{}}
                     />

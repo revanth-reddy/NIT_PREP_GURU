@@ -1,4 +1,4 @@
-package com.nit_prep_guru;
+package com.dronacharya;
 
 import android.app.Application;
 import android.content.Context;

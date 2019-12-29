@@ -13,7 +13,7 @@ class SettingsScreen extends React.Component {
         <View >
           <Appbar.Header style={{backgroundColor: '#3BAD87'}}>
             <Appbar.Content
-              title="NIT PREP GURU"
+              title="Dronacharya"
               subtitle="The Placement Preparation Tool"
               style={{alignItems: "center"}}
             />
