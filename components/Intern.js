@@ -37,6 +37,8 @@ export default class Intern extends Component {
             year: data.year,
             experience: data.experience,
             problems: data.problems,
+            college: data.college,
+            credits: data.credits,
           });
         }
         this.setState({
@@ -79,7 +81,7 @@ export default class Intern extends Component {
             style={[styles.itemContainer, {backgroundColor: '#34495e'}]}>
             <Text style={styles.itemName}>Job Title : {item.job_title}</Text>
             <Text style={styles.itemName}>Year : {item.year}</Text>
-            <Text style={styles.itemName}>Experience : {item.experience}</Text>
+            <Text style={styles.itemName}>College : {item.college}</Text>
           </TouchableOpacity>
         )}
       />

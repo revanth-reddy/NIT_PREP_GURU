@@ -11,6 +11,8 @@ class HelpScreen extends React.Component {
         type: '',
         exp: '',
         problem: '',
+        college: '',
+        credits: '',
         hide: true,
         accept: false,
         };
@@ -28,6 +30,8 @@ class HelpScreen extends React.Component {
                   placement: this.state.type,
                   experience: this.state.exp,
                   problems: this.state.problem,
+                  college: this.state.college,
+                  credits: this.state.credits,
                 },
                 auth: {
                   username: 'admin',
@@ -148,6 +152,19 @@ class HelpScreen extends React.Component {
                             multiline = {true}
                             numberOfLines = {4}
                             onChangeText={problem => this.setState({ problem })}
+                        />
+                        <TextInput
+                            label='Your College Name'
+                            placeholder='Please write Off-Campus for off-campus'
+                            value={this.state.college}
+                            mode = 'outlined'
+                            onChangeText={college => this.setState({ college })}
+                        />
+                        <TextInput
+                            label='Your Name'
+                            value={this.state.credits}
+                            mode = 'outlined'
+                            onChangeText={credits => this.setState({ credits })}
                         />
                         <Button icon="rocket" style={{marginTop: 10}} mode="contained" onPress={() => this.display()}>
                             Submit
