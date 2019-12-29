@@ -16,10 +16,15 @@ export default class Fte extends Component {
       url: '',
       isLoading: true,
       dataSource: [],
+      refreshing: false,
     };
   }
 
   componentDidMount() {
+    this.getData();
+  }
+
+  getData() {
     axios({
       method: 'get',
       url: `${this.state.url}`,
@@ -44,12 +49,24 @@ export default class Fte extends Component {
         this.setState({
           isLoading: false,
           dataSource: ob,
+          refreshing: false,
         });
       })
       .catch(error => {
         console.error('hello - ' + error);
       });
   }
+
+  handleRefresh = () => {
+    this.setState(
+      {
+        refreshing: true,
+      },
+      () => {
+        this.getData();
+      },
+    );
+  };
 
   render() {
     this.state.url = this.props.url;
@@ -73,6 +90,8 @@ export default class Fte extends Component {
         itemDimension={130}
         items={this.state.dataSource}
         style={styles.gridView}
+        refreshing={this.state.refreshing}
+        onRefresh={this.handleRefresh}
         // staticDimension={300}
         // fixed
         // spacing={20}
@@ -96,9 +115,9 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     borderRadius: 10,
-    padding: 20,
+    padding: 10,
     height: 200,
-    flex: 1,
+    elevation: 20,
   },
   itemName: {
     fontSize: 16,

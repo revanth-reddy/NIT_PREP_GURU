@@ -45,7 +45,7 @@ class Prep extends React.Component {
         </View>
         <ScrollView>
           <View style={styles.container}>
-            <PrepComp onPress={() => this.props.navigation.navigate('Home')} />
+            <PrepComp />
           </View>
         </ScrollView>
       </View>

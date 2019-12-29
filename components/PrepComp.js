@@ -6,6 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
   ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import {withNavigation, SafeAreaView} from 'react-navigation';
@@ -21,9 +22,14 @@ class PrepComp extends React.Component {
       isLoading: true,
       index: 0,
       dataSource: [],
+      refreshing: false,
     };
   }
   componentDidMount() {
+    this.getData();
+  }
+
+  getData() {
     axios({
       method: 'get',
       url: 'http://52.66.210.173/companies/',
@@ -43,6 +49,7 @@ class PrepComp extends React.Component {
         this.setState({
           isLoading: false,
           dataSource: ob,
+          refreshing: false,
         });
       })
       .catch(error => {
@@ -65,6 +72,17 @@ class PrepComp extends React.Component {
     );
   }
 
+  _onRefresh() {
+    this.setState(
+      {
+        refreshing: true,
+      },
+      () => {
+        this.getData();
+      },
+    );
+  }
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -75,7 +93,7 @@ class PrepComp extends React.Component {
     }
     // console.log(this.props);
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <Carousel
           ref={ref => (this.carousel = ref)}
           data={this.state.dataSource}
@@ -83,11 +101,16 @@ class PrepComp extends React.Component {
           sliderHeight={screenHeight * 0.8}
           itemWidth={screenWidth - 60}
           vertical={true}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+            />
+          }
           itemHeight={screenHeight / 4}
           renderItem={this._renderItem.bind(this)}
         />
-        <View />
-      </SafeAreaView>
+      </View>
     );
   }
 }

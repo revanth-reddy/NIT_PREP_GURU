@@ -16,10 +16,15 @@ export default class Intern extends Component {
       url: '',
       isLoading: true,
       dataSource: [],
+      refreshing: false,
     };
   }
 
   componentDidMount() {
+    this.getData();
+  }
+
+  getData() {
     axios({
       method: 'get',
       url: `${this.state.url}`,
@@ -44,12 +49,24 @@ export default class Intern extends Component {
         this.setState({
           isLoading: false,
           dataSource: ob,
+          refreshing: false,
         });
       })
       .catch(error => {
         console.error('hello - ' + error);
       });
   }
+
+  handleRefresh = () => {
+    this.setState(
+      {
+        refreshing: true,
+      },
+      () => {
+        this.getData();
+      },
+    );
+  };
 
   render() {
     this.state.url = this.props.url;
@@ -72,12 +89,14 @@ export default class Intern extends Component {
         itemDimension={130}
         items={this.state.dataSource}
         style={styles.gridView}
+        refreshing={this.state.refreshing}
+        onRefresh={this.handleRefresh}
         // staticDimension={300}
         // fixed
         // spacing={20}
         renderItem={({item, index}) => (
           <TouchableOpacity
-            onPress={() => alert(item.date)}
+            onPress={() => alert(item.job_title)}
             style={[styles.itemContainer, {backgroundColor: '#34495e'}]}>
             <Text style={styles.itemName}>Job Title : {item.job_title}</Text>
             <Text style={styles.itemName}>Year : {item.year}</Text>
