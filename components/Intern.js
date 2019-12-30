@@ -5,9 +5,11 @@ import {
   Text,
   TouchableOpacity,
   ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
 import {FlatGrid} from 'react-native-super-grid';
 import axios from 'react-native-axios';
+import {ScrollView} from 'react-native-gesture-handler';
 
 export default class Intern extends Component {
   constructor(props) {
@@ -87,9 +89,15 @@ export default class Intern extends Component {
     }
     if (!this.state.isLoading && this.state.dataSource.length === 0) {
       return (
-        <View>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.handleRefresh.bind(this)}
+            />
+          }>
           <Text>No data to show</Text>
-        </View>
+        </ScrollView>
       );
     }
     return (

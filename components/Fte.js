@@ -5,6 +5,8 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
+  RefreshControl,
 } from 'react-native';
 import {FlatGrid} from 'react-native-super-grid';
 import axios from 'react-native-axios';
@@ -70,6 +72,12 @@ export default class Fte extends Component {
   };
 
   render() {
+    const randomRgb = () => {
+      const red = Math.floor(Math.random() * 200);
+      const green = Math.floor(Math.random() * 200);
+      const blue = Math.floor(Math.random() * 200);
+      return `rgb(${red}, ${green}, ${blue})`;
+    };
     this.state.url = this.props.url;
     if (this.state.isLoading) {
       return (
@@ -80,17 +88,17 @@ export default class Fte extends Component {
     }
     if (!this.state.isLoading && this.state.dataSource.length === 0) {
       return (
-        <View>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.handleRefresh.bind(this)}
+            />
+          }>
           <Text>No data to show</Text>
-        </View>
+        </ScrollView>
       );
     }
-    const randomRgb = () => {
-      const red = Math.floor(Math.random() * 200);
-      const green = Math.floor(Math.random() * 200);
-      const blue = Math.floor(Math.random() * 200);
-      return `rgb(${red}, ${green}, ${blue})`;
-    };
 
     return (
       <FlatGrid
