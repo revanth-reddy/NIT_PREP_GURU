@@ -61,6 +61,7 @@ export default class Fte extends Component {
     this.setState(
       {
         refreshing: true,
+        isLoading: true,
       },
       () => {
         this.getData();
@@ -84,6 +85,12 @@ export default class Fte extends Component {
         </View>
       );
     }
+    const randomRgb = () => {
+      const red = Math.floor(Math.random() * 200);
+      const green = Math.floor(Math.random() * 200);
+      const blue = Math.floor(Math.random() * 200);
+      return `rgb(${red}, ${green}, ${blue})`;
+    };
 
     return (
       <FlatGrid
@@ -97,7 +104,7 @@ export default class Fte extends Component {
         // spacing={20}
         renderItem={({item, index}) => (
           <TouchableOpacity
-            style={[styles.itemContainer, {backgroundColor: '#34495e'}]}>
+            style={[styles.itemContainer, {backgroundColor: randomRgb()}]}>
             <Text style={styles.itemName}>Job Title : {item.job_title}</Text>
             <Text style={styles.itemName}>Year : {item.year}</Text>
             <Text style={styles.itemName}>College : {item.college}</Text>
