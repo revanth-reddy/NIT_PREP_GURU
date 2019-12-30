@@ -13,18 +13,24 @@ class SettingsScreen extends React.Component {
       loggedin: true,
     };
   }
+  componentDidMount(){
+    if(!global.user_name)
+    {
+      this.setState({loggedin:false});
+      global.user_photo = 'https://cdn3.iconfinder.com/data/icons/business-round-flat-vol-1-1/36/user_account_profile_avatar_person_student_male-512.png';
+    }
+  }
   Logout = () => {
       global.user_name = '';
       global.user_photo = 'https://cdn3.iconfinder.com/data/icons/business-round-flat-vol-1-1/36/user_account_profile_avatar_person_student_male-512.png';
       global.user_email = ' ';
       global.user_data = '';
-      console.log('logout')
       this.setState({loggedin:false});
   }
 
   render() {
     const {navigate} = this.props.navigation;
-    if(user_name != '' && this.state.loggedin)
+    if(this.state.loggedin)
     {
       return (
           <ScrollView style={styles.container}>
@@ -38,10 +44,10 @@ class SettingsScreen extends React.Component {
               </Appbar.Header>
             </View>
             <View style={{flex:1, flexDirection:"row", alignItems: "center", justifyContent: "space-between"}}>
-              <Image source={{uri : user_photo}} style={styles.image} />
+              <Image source={{uri : global.user_photo}} style={styles.image} />
               <View style={{flex:1, flexDirection: "column", width: windowwidth*3/4,}}>
-                <Text style={styles.username}>{user_name}</Text>
-                <Text style={{textAlign: "center",}}>{user_email}</Text>
+                <Text style={styles.username}>{global.user_name}</Text>
+                <Text style={{textAlign: "center",}}>{global.user_email}</Text>
               </View>
             </View>
             <Divider style={{height: 1, marginLeft: windowwidth/25, marginRight: windowwidth/25,}}/>
@@ -80,9 +86,6 @@ class SettingsScreen extends React.Component {
 
                 </TouchableOpacity>
             </View>
-            <View style={{height: 10000}}>
-
-            </View>
           </ScrollView>
       );
     }
@@ -100,7 +103,7 @@ class SettingsScreen extends React.Component {
             </Appbar.Header>
           </View>
           <View style={{flex:1, flexDirection:"row", alignItems: "center", justifyContent: "space-between"}}>
-            <Image source={{uri : user_photo}} style={styles.image} />
+            <Image source={{uri : global.user_photo}} style={styles.image} />
             <View style={{flex:1, flexDirection: "column", width: windowwidth*3/4,}}>
               <Text style={styles.username}>Hey Buddy !</Text>
               <Text style={{textAlign: "center",}}>Please login to see your name here</Text>
@@ -142,9 +145,6 @@ class SettingsScreen extends React.Component {
 
               </TouchableOpacity>
           </View>
-          <View style={{height: 10000}}>
-
-          </View>
         </ScrollView>
     );
     }
@@ -155,7 +155,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    height:1000,
   },  
   image: {
     width: windowwidth/4,

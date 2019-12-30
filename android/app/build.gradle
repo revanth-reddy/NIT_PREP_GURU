@@ -189,6 +189,7 @@ android {
 }
 
 dependencies {
+    implementation project(':@react-native-community_async-storage')
     // implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation project(':react-native-onesignal')
     implementation fileTree(dir: "libs", include: ["*.jar"])

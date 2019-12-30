@@ -42,7 +42,7 @@ class Login extends Component {
       //console.log(result.accessToken);
       googletoken = result.user.id;
       // console.log(googletoken);
-      console.log("navigate")
+      // console.log("navigate")
       this.props.navigation.navigate('App');
     } catch (error) {
       console.log(error);
@@ -55,33 +55,9 @@ render(){
       <ImageBackground
         source={require('../assets/login_background.jpg')}
         style={styles.background}>
-        <TextInput
-          style={styles.input}
-          underlineColorAndroid="transparent"
-          value={this.state.email}
-          placeholder="Username"
-          placeholderTextColor="#fff"
-          onChangeText={newValue => {
-            this.setState({
-              email:newValue
-            })
-          }}
-        />
-        <TextInput
-          style={styles.input}
-          value={this.state.password}
-          underlineColorAndroid="transparent"
-          placeholder="Password"
-          placeholderTextColor="#fff"
-          secureTextEntry
-          onChangeText={newValue => {
-            this.setState({
-              password: newValue
-            })
-          }}
-        />
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.text}>Log in</Text>
+
+        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('App')}>
+          <Text style={styles.text}>Skip</Text>
         </TouchableOpacity>
         <GoogleSigninButton
                 style={{

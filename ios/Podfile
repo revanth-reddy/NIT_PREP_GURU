@@ -36,6 +36,8 @@ target 'NIT_PREP_GURU' do
 
   pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'NIT_PREP_GURUTests' do
     inherit! :search_paths
     # Pods for testing
