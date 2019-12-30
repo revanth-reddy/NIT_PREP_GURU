@@ -6,11 +6,14 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   RefreshControl,
+  Dimensions,
 } from 'react-native';
 import {FlatGrid} from 'react-native-super-grid';
 import axios from 'react-native-axios';
 import {ScrollView} from 'react-native-gesture-handler';
+import {Title, Subheading} from 'react-native-paper';
 
+const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 export default class Intern extends Component {
   constructor(props) {
     super(props);
@@ -114,9 +117,18 @@ export default class Intern extends Component {
           <TouchableOpacity
             onPress={() => alert(item.job_title)}
             style={[styles.itemContainer, {backgroundColor: randomRgb()}]}>
-            <Text style={styles.itemName}>Job Title : {item.job_title}</Text>
-            <Text style={styles.itemName}>Year : {item.year}</Text>
-            <Text style={styles.itemName}>College : {item.college}</Text>
+  <View>
+              <Title style={styles.title}>Job Title :</Title>
+              <Subheading style={styles.subTitle}>{item.job_title}</Subheading>
+            </View>
+            <View>
+              <Title style={styles.title}>Year :</Title>
+              <Subheading style={styles.subTitle}>{item.year}</Subheading>
+            </View>
+            <View>
+              <Title style={styles.title}>College :</Title>
+              <Subheading style={styles.subTitle}>{item.college}</Subheading>
+            </View>
           </TouchableOpacity>
         )}
       />
@@ -131,14 +143,21 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     borderRadius: 10,
-    padding: 10,
-    height: 200,
+    padding: 15,
+    height: screenHeight * 0.3,
+    width: screenWidth * 0.46,
     elevation: 20,
   },
-  itemName: {
+  title: {
     fontSize: 16,
     color: '#fff',
     fontWeight: '600',
+  },
+  subTitle: {
+    fontSize: 16,
+    color: '#fff',
+    fontWeight: '600',
+    marginLeft: 10,
   },
   itemCode: {
     fontWeight: '600',
