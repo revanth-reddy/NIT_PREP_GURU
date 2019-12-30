@@ -76,6 +76,7 @@ class PrepComp extends React.Component {
     this.setState(
       {
         refreshing: true,
+        isLoading: true,
       },
       () => {
         this.getData();
