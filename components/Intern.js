@@ -12,9 +12,10 @@ import {FlatGrid} from 'react-native-super-grid';
 import axios from 'react-native-axios';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Title, Subheading} from 'react-native-paper';
+import {withNavigation} from 'react-navigation';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
-export default class Intern extends Component {
+class Intern extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -115,9 +116,13 @@ export default class Intern extends Component {
         // spacing={20}
         renderItem={({item, index}) => (
           <TouchableOpacity
-            onPress={() => alert(item.job_title)}
+            onPress={() => {
+              this.props.navigation.navigate('Exp', {
+                ob: item,
+              });
+            }}
             style={[styles.itemContainer, {backgroundColor: randomRgb()}]}>
-  <View>
+            <View>
               <Title style={styles.title}>Job Title :</Title>
               <Subheading style={styles.subTitle}>{item.job_title}</Subheading>
             </View>
@@ -142,7 +147,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemContainer: {
-    borderRadius: 10,
+    borderRadius: 15,
     padding: 15,
     height: screenHeight * 0.3,
     width: screenWidth * 0.46,
@@ -165,3 +170,5 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
+
+export default withNavigation(Intern);

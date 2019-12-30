@@ -12,9 +12,10 @@ import {
 import {FlatGrid} from 'react-native-super-grid';
 import axios from 'react-native-axios';
 import {Title, Subheading} from 'react-native-paper';
+import {withNavigation} from 'react-navigation';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
-export default class Fte extends Component {
+class Fte extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -115,7 +116,12 @@ export default class Fte extends Component {
         // spacing={20}
         renderItem={({item, index}) => (
           <TouchableOpacity
-            style={[styles.itemContainer, {backgroundColor: randomRgb()}]}>
+            style={[styles.itemContainer, {backgroundColor: randomRgb()}]}
+            onPress={() => {
+              this.props.navigation.navigate('Exp', {
+                ob: item,
+              });
+            }}>
             <View>
               <Title style={styles.title}>Job Title :</Title>
               <Subheading style={styles.subTitle}>{item.job_title}</Subheading>
@@ -141,7 +147,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemContainer: {
-    borderRadius: 10,
+    borderRadius: 15,
     padding: 15,
     height: screenHeight * 0.3,
     width: screenWidth * 0.46,
@@ -164,3 +170,5 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
+
+export default withNavigation(Fte);
