@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
 import {
   View,
   StyleSheet,
@@ -7,11 +7,49 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-community/google-signin';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+GoogleSignin.configure();
 
+class Login extends Component {
+  constructor(){
+    super();
+    this.state={
+      email:'',
+      password:''
+    }
+  }
+
+  _signInGoogle = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const result = await GoogleSignin.signIn();
+      console.log(result);
+      // this.setState({
+      //   signedIn: true,
+      //   name: result.user.name,
+      //   photoUrl: result.user.photo,
+      // });
+      global.user_name = result.user.name;
+      global.user_photo = result.user.photo || {imagegif};
+      global.user_email = result.user.email || ' ';
+      global.user_data = '';
+  
+      //console.log(result.accessToken);
+      googletoken = result.user.id;
+      // console.log(googletoken);
+      console.log("navigate")
+      this.props.navigation.navigate('Home');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+render(){
   return (
     <View style={styles.viewStyles}>
       <ImageBackground
@@ -20,30 +58,48 @@ const Login = () => {
         <TextInput
           style={styles.input}
           underlineColorAndroid="transparent"
-          value={email}
+          value={this.state.email}
           placeholder="Username"
           placeholderTextColor="#fff"
           onChangeText={newValue => {
-            setEmail(newValue);
+            this.setState({
+              email:newValue
+            })
           }}
         />
         <TextInput
           style={styles.input}
-          value={password}
+          value={this.state.password}
           underlineColorAndroid="transparent"
           placeholder="Password"
           placeholderTextColor="#fff"
           secureTextEntry
           onChangeText={newValue => {
-            setPassword(newValue);
+            this.setState({
+              password: newValue
+            })
           }}
         />
         <TouchableOpacity style={styles.button}>
           <Text style={styles.text}>Log in</Text>
         </TouchableOpacity>
+        <GoogleSigninButton
+                style={{
+                  width: 180,
+                  height: 50,
+                  // marginBottom: 10,
+                  // opacity: 1,
+                  position: 'absolute',
+                  bottom: 150
+                }}
+                size={GoogleSigninButton.Size.Wide}
+                color={GoogleSigninButton.Color.Light}
+                onPress={this._signInGoogle}
+              />
       </ImageBackground>
     </View>
   );
+  }
 };
 
 const styles = StyleSheet.create({

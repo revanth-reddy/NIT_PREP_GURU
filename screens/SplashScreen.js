@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, Image, ActivityIndicator} from 'react-native';
 export default class SplashScreen extends Component {
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('App');
+      this.props.navigation.navigate('Prep');
     }, 2000);
   }
 
