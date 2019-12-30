@@ -43,7 +43,7 @@ class Login extends Component {
       googletoken = result.user.id;
       // console.log(googletoken);
       console.log("navigate")
-      this.props.navigation.navigate('Home');
+      this.props.navigation.navigate('App');
     } catch (error) {
       console.log(error);
     }

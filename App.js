@@ -5,7 +5,6 @@ import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import HomeScreen from './screens/Home';
 import SettingsScreen from './screens/settings';
-import CompScreen from './screens/comp';
 import Prep from './screens/Prep';
 
 const TabNavigator = createMaterialBottomTabNavigator(
