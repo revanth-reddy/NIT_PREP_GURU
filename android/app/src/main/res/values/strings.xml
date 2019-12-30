@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Dronacharya</string>
+    <string name="facebook_app_id">561716888009554</string>
+    <string name="fb_login_protocol_scheme">fb561716888009554</string>
 </resources>

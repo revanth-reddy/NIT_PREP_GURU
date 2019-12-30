@@ -1,152 +1,445 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, Dimensions, TouchableOpacity} from 'react-native';
-import { Appbar, Divider } from 'react-native-paper';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Image,
+  Text,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+import {Appbar, Divider} from 'react-native-paper';
+import {
+  GraphRequest,
+  GraphRequestManager,
+  LoginManager,
+} from 'react-native-fbsdk';
 
-
-const windowwidth = Dimensions.get("window").width;
-const windowheight = Dimensions.get("window").height;
+const windowwidth = Dimensions.get('window').width;
+const windowheight = Dimensions.get('window').height;
 
 class SettingsScreen extends React.Component {
   constructor() {
     super();
     this.state = {
       loggedin: true,
+      name: '',
+      pic: '',
     };
+    // Create a graph request asking for user information with a callback to handle the response.
+    const infoRequest = new GraphRequest(
+      '/me?fields=name,picture',
+      null,
+      this._responseInfoCallback,
+    );
+    // Start the graph request.
+    new GraphRequestManager().addRequest(infoRequest).start();
   }
+
+  //Create response callback.
+  _responseInfoCallback = (error, result) => {
+    if (error) {
+    //  alert('Error fetching data: ' + error.toString());
+    } else {
+      this.setState({name: result.name, pic: result.picture.data.url});
+    }
+  };
+
   Logout = () => {
-      global.user_name = '';
-      global.user_photo = 'https://cdn3.iconfinder.com/data/icons/business-round-flat-vol-1-1/36/user_account_profile_avatar_person_student_male-512.png';
-      global.user_email = ' ';
-      global.user_data = '';
-      console.log('logout')
-      this.setState({loggedin:false});
-  }
+    global.user_name = '';
+    global.user_photo =
+      'https://cdn3.iconfinder.com/data/icons/business-round-flat-vol-1-1/36/user_account_profile_avatar_person_student_male-512.png';
+    global.user_email = ' ';
+    global.user_data = '';
+    console.log('logout');
+    this.setState({loggedin: false});
+  };
 
   render() {
     const {navigate} = this.props.navigation;
-    if(user_name != '' && this.state.loggedin)
-    {
-      return (
-          <ScrollView style={styles.container}>
-            <View >
-              <Appbar.Header style={{backgroundColor: '#3BAD87'}}>
-                <Appbar.Content
-                  title="Dronacharya"
-                  subtitle="The Placement Preparation Tool"
-                  style={{alignItems: "center"}}
-                />
-              </Appbar.Header>
-            </View>
-            <View style={{flex:1, flexDirection:"row", alignItems: "center", justifyContent: "space-between"}}>
-              <Image source={{uri : user_photo}} style={styles.image} />
-              <View style={{flex:1, flexDirection: "column", width: windowwidth*3/4,}}>
-                <Text style={styles.username}>{user_name}</Text>
-                <Text style={{textAlign: "center",}}>{user_email}</Text>
-              </View>
-            </View>
-            <Divider style={{height: 1, marginLeft: windowwidth/25, marginRight: windowwidth/25,}}/>
-            <View style={{alignItems:"center"}}>
-              <TouchableOpacity onPress={()=>console.log("issue !")}>
-                <Text style={{fontSize: 20,  marginBottom:20,  marginTop:20}}>Have an Issue?</Text>
-              </TouchableOpacity>
-            </View>
-            <Divider style={{height: 1, marginLeft: windowwidth/25, marginRight: windowwidth/25,}}/>
-            <View style={{alignItems:"center"}}>
-              <TouchableOpacity onPress={()=>console.log("issue !")}>
-                <Text style={{fontSize: 20,  marginBottom:20,  marginTop:20}}>Please Rate us</Text>
-              </TouchableOpacity>
-            </View>
-            <Divider style={{height: 1, marginLeft: windowwidth/25, marginRight: windowwidth/25,}}/>
-            <View style={{alignItems:"center"}}>
-              <TouchableOpacity onPress={()=>console.log("issue !")}>
-                <Text style={{fontSize: 20,  marginBottom:20,  marginTop:20}}>Faqs</Text>
-              </TouchableOpacity>
-            </View>
-            <Divider style={{height: 1, marginLeft: windowwidth/25, marginRight: windowwidth/25,}}/>
-            <View style={{alignItems:"center"}}>
-              <TouchableOpacity onPress={()=> this.Logout()}>
-                <Text style={{fontSize: 20,  marginBottom:100,  marginTop:20}}>Logout</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={{}}>
-                <View style={{ alignItems: "center", marginBottom:40}}>
-                  <Text style={{fontWeight: "bold",}}> Made with 💙 by </Text>
-                </View>
-                <TouchableOpacity style={{flex:1, flexDirection: "row", justifyContent:"space-evenly",}}>
-
-                    <Image source={{uri: 'https://avatars0.githubusercontent.com/u/30077154?s=460&v=4'}} style={{width: 40, height: 40, borderColor: 'black', borderRadius: 20}} />
-
-                    <Image source={{uri: 'https://avatars0.githubusercontent.com/u/40210064?s=460&v=4'}} style={{width: 40, height: 40, borderColor: 'black', borderRadius: 20}} />
-
-                </TouchableOpacity>
-            </View>
-            <View style={{height: 10000}}>
-
-            </View>
-          </ScrollView>
-      );
-    }
-    else
-    {
+    if (user_name != '' && this.state.loggedin) {
       return (
         <ScrollView style={styles.container}>
-          <View >
+          <View>
             <Appbar.Header style={{backgroundColor: '#3BAD87'}}>
               <Appbar.Content
                 title="Dronacharya"
                 subtitle="The Placement Preparation Tool"
-                style={{alignItems: "center"}}
+                style={{alignItems: 'center'}}
               />
             </Appbar.Header>
           </View>
-          <View style={{flex:1, flexDirection:"row", alignItems: "center", justifyContent: "space-between"}}>
-            <Image source={{uri : user_photo}} style={styles.image} />
-            <View style={{flex:1, flexDirection: "column", width: windowwidth*3/4,}}>
-              <Text style={styles.username}>Hey Buddy !</Text>
-              <Text style={{textAlign: "center",}}>Please login to see your name here</Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <Image source={{uri: global.user_photo}} style={styles.image} />
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'column',
+                width: (windowwidth * 3) / 4,
+              }}>
+              <Text style={styles.username}>{global.user_name}</Text>
+              <Text style={{textAlign: 'center'}}>{global.user_email}</Text>
             </View>
           </View>
-          <Divider style={{height: 1, marginLeft: windowwidth/25, marginRight: windowwidth/25,}}/>
-          <View style={{alignItems:"center"}}>
-            <TouchableOpacity onPress={()=>console.log("issue !")}>
-              <Text style={{fontSize: 20,  marginBottom:20,  marginTop:20}}>Have an Issue?</Text>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => console.log('issue !')}>
+              <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
+                Have an Issue?
+              </Text>
             </TouchableOpacity>
           </View>
-          <Divider style={{height: 1, marginLeft: windowwidth/25, marginRight: windowwidth/25,}}/>
-          <View style={{alignItems:"center"}}>
-            <TouchableOpacity onPress={()=>console.log("issue !")}>
-              <Text style={{fontSize: 20,  marginBottom:20,  marginTop:20}}>Please Rate us</Text>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => console.log('issue !')}>
+              <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
+                Please Rate us
+              </Text>
             </TouchableOpacity>
           </View>
-          <Divider style={{height: 1, marginLeft: windowwidth/25, marginRight: windowwidth/25,}}/>
-          <View style={{alignItems:"center"}}>
-            <TouchableOpacity onPress={()=>console.log("issue !")}>
-              <Text style={{fontSize: 20,  marginBottom:20,  marginTop:20}}>Faqs</Text>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => console.log('issue !')}>
+              <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
+                Faqs
+              </Text>
             </TouchableOpacity>
           </View>
-          <Divider style={{height: 1, marginLeft: windowwidth/25, marginRight: windowwidth/25,}}/>
-          <View style={{alignItems:"center"}}>
-            <TouchableOpacity onPress={()=> navigate('Login')}>
-              <Text style={{fontSize: 20,  marginBottom:100,  marginTop:20}}>Login !</Text>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => this.Logout()}>
+              <Text style={{fontSize: 20, marginBottom: 100, marginTop: 20}}>
+                Logout
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={{}}>
-              <View style={{ alignItems: "center", marginBottom:40}}>
-                <Text style={{fontWeight: "bold",}}> Made with 💙 by </Text>
-              </View>
-              <TouchableOpacity style={{flex:1, flexDirection: "row", justifyContent:"space-evenly",}}>
+            <View style={{alignItems: 'center', marginBottom: 40}}>
+              <Text style={{fontWeight: 'bold'}}> Made with 💙 by </Text>
+            </View>
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+              }}>
+              <Image
+                source={{
+                  uri:
+                    'https://avatars0.githubusercontent.com/u/30077154?s=460&v=4',
+                }}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderColor: 'black',
+                  borderRadius: 20,
+                }}
+              />
 
-                  <Image source={{uri: 'https://avatars0.githubusercontent.com/u/30077154?s=460&v=4'}} style={{width: 40, height: 40, borderColor: 'black', borderRadius: 20}} />
-
-                  <Image source={{uri: 'https://avatars0.githubusercontent.com/u/40210064?s=460&v=4'}} style={{width: 40, height: 40, borderColor: 'black', borderRadius: 20}} />
-
-              </TouchableOpacity>
+              <Image
+                source={{
+                  uri:
+                    'https://avatars0.githubusercontent.com/u/40210064?s=460&v=4',
+                }}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderColor: 'black',
+                  borderRadius: 20,
+                }}
+              />
+            </TouchableOpacity>
           </View>
-          <View style={{height: 10000}}>
-
-          </View>
+          <View style={{height: 10000}} />
         </ScrollView>
-    );
+      );
+    } else if (this.state.name != '' && this.state.loggedin) {
+      return (
+        <ScrollView style={styles.container}>
+          <View>
+            <Appbar.Header style={{backgroundColor: '#3BAD87'}}>
+              <Appbar.Content
+                title="Dronacharya"
+                subtitle="The Placement Preparation Tool"
+                style={{alignItems: 'center'}}
+              />
+            </Appbar.Header>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <Image source={{uri: this.state.pic}} style={styles.image} />
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'column',
+                width: (windowwidth * 3) / 4,
+              }}>
+              <Text style={styles.username}>{this.state.name}</Text>
+            </View>
+          </View>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => console.log('issue !')}>
+              <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
+                Have an Issue?
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => console.log('issue !')}>
+              <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
+                Please Rate us
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => console.log('issue !')}>
+              <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
+                Faqs
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
+            <TouchableOpacity
+              onPress={() => {
+                LoginManager.logOut();
+                this.Logout();
+              }}>
+              <Text style={{fontSize: 20, marginBottom: 100, marginTop: 20}}>
+                Logout
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{}}>
+            <View style={{alignItems: 'center', marginBottom: 40}}>
+              <Text style={{fontWeight: 'bold'}}> Made with 💙 by </Text>
+            </View>
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+              }}>
+              <Image
+                source={{
+                  uri:
+                    'https://avatars0.githubusercontent.com/u/30077154?s=460&v=4',
+                }}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderColor: 'black',
+                  borderRadius: 20,
+                }}
+              />
+
+              <Image
+                source={{
+                  uri:
+                    'https://avatars0.githubusercontent.com/u/40210064?s=460&v=4',
+                }}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderColor: 'black',
+                  borderRadius: 20,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={{height: 10000}} />
+        </ScrollView>
+      );
+    } else {
+      return (
+        <ScrollView style={styles.container}>
+          <View>
+            <Appbar.Header style={{backgroundColor: '#3BAD87'}}>
+              <Appbar.Content
+                title="Dronacharya"
+                subtitle="The Placement Preparation Tool"
+                style={{alignItems: 'center'}}
+              />
+            </Appbar.Header>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <Image source={{uri: user_photo}} style={styles.image} />
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'column',
+                width: (windowwidth * 3) / 4,
+              }}>
+              <Text style={styles.username}>Hey Buddy !</Text>
+              <Text style={{textAlign: 'center'}}>
+                Please login to see your name here
+              </Text>
+            </View>
+          </View>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => console.log('issue !')}>
+              <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
+                Have an Issue?
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => console.log('issue !')}>
+              <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
+                Please Rate us
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => console.log('issue !')}>
+              <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
+                Faqs
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => navigate('Login')}>
+              <Text style={{fontSize: 20, marginBottom: 100, marginTop: 20}}>
+                Login !
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{}}>
+            <View style={{alignItems: 'center', marginBottom: 40}}>
+              <Text style={{fontWeight: 'bold'}}> Made with 💙 by </Text>
+            </View>
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+              }}>
+              <Image
+                source={{
+                  uri:
+                    'https://avatars0.githubusercontent.com/u/30077154?s=460&v=4',
+                }}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderColor: 'black',
+                  borderRadius: 20,
+                }}
+              />
+
+              <Image
+                source={{
+                  uri:
+                    'https://avatars0.githubusercontent.com/u/40210064?s=460&v=4',
+                }}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderColor: 'black',
+                  borderRadius: 20,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={{height: 10000}} />
+        </ScrollView>
+      );
     }
   }
 }
@@ -155,27 +448,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    height:1000,
-  },  
+    height: 1000,
+  },
   image: {
-    width: windowwidth/4,
-    height: windowwidth/4,
-    borderRadius: windowwidth/4,
+    width: windowwidth / 4,
+    height: windowwidth / 4,
+    borderRadius: windowwidth / 4,
     borderWidth: 1,
     borderColor: 'black',
     marginLeft: 10,
     marginTop: 10,
-    marginBottom:10,
+    marginBottom: 10,
     // position:"absolute",
     // top: 10,
     // left:10
   },
   username: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 20,
-    textAlignVertical: "center",
-    textAlign: "center",
-  }
+    textAlignVertical: 'center',
+    textAlign: 'center',
+  },
 });
 
 export default SettingsScreen;

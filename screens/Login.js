@@ -12,18 +12,24 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-community/google-signin';
+import {LoginButton, AccessToken} from 'react-native-fbsdk';
 
 GoogleSignin.configure();
 
 class Login extends Component {
-  constructor(){
+  constructor() {
     super();
-    this.state={
-      email:'',
-      password:''
-    }
+    this.state = {
+      email: '',
+      password: '',
+    };
+    console.log(AccessToken);
+    AccessToken.getCurrentAccessToken().then(data => {
+      if (data) {
+        this.goToHomePage();
+      }
+    });
   }
-
   _signInGoogle = async () => {
     try {
       await GoogleSignin.hasPlayServices();
@@ -38,69 +44,88 @@ class Login extends Component {
       global.user_photo = result.user.photo || {imagegif};
       global.user_email = result.user.email || ' ';
       global.user_data = '';
-  
+
       //console.log(result.accessToken);
       googletoken = result.user.id;
       // console.log(googletoken);
-      console.log("navigate")
+      console.log('navigate');
       this.props.navigation.navigate('App');
     } catch (error) {
       console.log(error);
     }
   };
 
-render(){
-  return (
-    <View style={styles.viewStyles}>
-      <ImageBackground
-        source={require('../assets/login_background.jpg')}
-        style={styles.background}>
-        <TextInput
-          style={styles.input}
-          underlineColorAndroid="transparent"
-          value={this.state.email}
-          placeholder="Username"
-          placeholderTextColor="#fff"
-          onChangeText={newValue => {
-            this.setState({
-              email:newValue
-            })
-          }}
-        />
-        <TextInput
-          style={styles.input}
-          value={this.state.password}
-          underlineColorAndroid="transparent"
-          placeholder="Password"
-          placeholderTextColor="#fff"
-          secureTextEntry
-          onChangeText={newValue => {
-            this.setState({
-              password: newValue
-            })
-          }}
-        />
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.text}>Log in</Text>
-        </TouchableOpacity>
-        <GoogleSigninButton
-                style={{
-                  width: 180,
-                  height: 50,
-                  // marginBottom: 10,
-                  // opacity: 1,
-                  position: 'absolute',
-                  bottom: 150
-                }}
-                size={GoogleSigninButton.Size.Wide}
-                color={GoogleSigninButton.Color.Light}
-                onPress={this._signInGoogle}
-              />
-      </ImageBackground>
-    </View>
-  );
+  gotoHompage(accessToken) {
+    this.props.navigation.navigate('App');
   }
-};
+
+  render() {
+    return (
+      <View style={styles.viewStyles}>
+        <ImageBackground
+          source={require('../assets/login_background.jpg')}
+          style={styles.background}>
+          <TextInput
+            style={styles.input}
+            underlineColorAndroid="transparent"
+            value={this.state.email}
+            placeholder="Username"
+            placeholderTextColor="#fff"
+            onChangeText={newValue => {
+              this.setState({
+                email: newValue,
+              });
+            }}
+          />
+          <TextInput
+            style={styles.input}
+            value={this.state.password}
+            underlineColorAndroid="transparent"
+            placeholder="Password"
+            placeholderTextColor="#fff"
+            secureTextEntry
+            onChangeText={newValue => {
+              this.setState({
+                password: newValue,
+              });
+            }}
+          />
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Log in</Text>
+          </TouchableOpacity>
+          <GoogleSigninButton
+            style={{
+              width: 180,
+              height: 50,
+              // marginBottom: 10,
+              // opacity: 1,
+              position: 'absolute',
+              bottom: 150,
+            }}
+            size={GoogleSigninButton.Size.Wide}
+            color={GoogleSigninButton.Color.Light}
+            onPress={this._signInGoogle}
+          />
+          <LoginButton
+            publishPermissions={['publish_actions']}
+            readPermissions={['public_profile']}
+            onLoginFinished={(error, result) => {
+              if (error) {
+                console.log(error);
+              } else if (result.isCancelled) {
+                console.log('Login is cancelled');
+              } else {
+                AccessToken.getCurrentAccessToken().then(data => {
+                  this.gotoHompage();
+                });
+              }
+            }}
+          />
+        </ImageBackground>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   viewStyles: {
@@ -142,7 +167,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
 });
 
 export default Login;
