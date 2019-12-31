@@ -13,6 +13,7 @@ import axios from 'react-native-axios';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Title, Subheading} from 'react-native-paper';
 import {withNavigation} from 'react-navigation';
+import AnimatedLoader from 'react-native-animated-loader';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 class Intern extends Component {
@@ -86,8 +87,16 @@ class Intern extends Component {
     this.state.url = this.props.url;
     if (this.state.isLoading) {
       return (
-        <View style={{flex: 1, padding: 20}}>
-          <ActivityIndicator />
+        <View>
+          <AnimatedLoader
+            style={{width: 100, height: 100}}
+            visible={true}
+            overlayColor="rgba(255,255,255)"
+            source={require('./loader.json')}
+            animationStyle={styles.lottie}
+            animationType="fade"
+            speed={2}
+          />
         </View>
       );
     }
