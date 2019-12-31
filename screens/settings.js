@@ -29,9 +29,7 @@ class SettingsScreen extends React.Component {
   }
 
   Logout = () => {
-    if (global.fb) {
-      LoginManager.logOut();
-    }
+    LoginManager.logOut();
     global.user_name = '';
     global.user_photo =
       'https://cdn3.iconfinder.com/data/icons/business-round-flat-vol-1-1/36/user_account_profile_avatar_person_student_male-512.png';
@@ -43,6 +41,7 @@ class SettingsScreen extends React.Component {
 
   render() {
     const {navigate} = this.props.navigation;
+    console.log(global.user_name);
     if (global.user_name != '' && this.state.loggedin) {
       return (
         <ScrollView style={styles.container}>

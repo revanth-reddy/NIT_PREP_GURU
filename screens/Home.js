@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image, ScrollView} from 'react-native';
+import {StyleSheet, View, Text, Image, ScrollView, BackHandler} from 'react-native';
 import { Appbar, Banner, Subheading, Divider } from 'react-native-paper';
 import Carousal from '../components/Carousel.js';
 import News from '../components/News';
@@ -17,8 +17,12 @@ class HomeScreen extends React.Component {
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
     OneSignal.addEventListener('ids', this.onIds);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
   }
-
+  handleBackButtonClick() {
+    this.props.navigation.goBack(null);
+    return true;
+  }
   componentWillUnmount() {
     OneSignal.removeEventListener('received', this.onReceived);
     OneSignal.removeEventListener('opened', this.onOpened);

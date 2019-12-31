@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  Dimensions,
 } from 'react-native';
 import {
   GoogleSignin,
@@ -18,8 +19,12 @@ import {
   GraphRequest,
   GraphRequestManager,
 } from 'react-native-fbsdk';
+import { Paragraph, Title } from 'react-native-paper';
 
 GoogleSignin.configure();
+
+const windowwidth = Dimensions.get('window').width;
+const windowheight = Dimensions.get('window').height;
 
 class Login extends Component {
   constructor() {
@@ -70,8 +75,8 @@ class Login extends Component {
     console.log(AccessToken);
     AccessToken.getCurrentAccessToken().then(data => {
       if (data) {
-        this.gotoHompage();
         global.fb = true;
+        this.gotoHompage();
       }
     });
   }
@@ -91,51 +96,32 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.viewStyles}>
-        <ImageBackground
-          source={require('../assets/login_background.jpg')}
-          style={styles.background}>
-          <TextInput
-            style={styles.input}
-            underlineColorAndroid="transparent"
-            value={this.state.email}
-            placeholder="Username"
-            placeholderTextColor="#fff"
-            onChangeText={newValue => {
-              this.setState({
-                email: newValue,
-              });
-            }}
-          />
-          <TextInput
-            style={styles.input}
-            value={this.state.password}
-            underlineColorAndroid="transparent"
-            placeholder="Password"
-            placeholderTextColor="#fff"
-            secureTextEntry
-            onChangeText={newValue => {
-              this.setState({
-                password: newValue,
-              });
-            }}
-          />
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Log in</Text>
-          </TouchableOpacity>
-          <GoogleSigninButton
+        <Title style={{fontSize: 30,marginBottom: 10}}>
+          Hi there!.
+        </Title>
+        <View style={{justifyContent: 'center', alignContent: 'center', width: windowwidth * 0.8 , margin: 10, flexDirection: 'row' }}>
+        <Text style={{fontSize: 14}}>
+          Sign-In to contribute your interview experience
+        </Text>
+        </View>
+        <View style={{width: windowwidth * 0.8, height: 50, justifyContent: 'center', margin: 20}}>
+        <GoogleSigninButton
             style={{
-              width: 180,
-              height: 50,
+              width: windowwidth * 0.8,
+              flex: 1,
+              maxHeight: 50,
               // marginBottom: 10,
               // opacity: 1,
-              position: 'absolute',
-              bottom: 150,
             }}
             size={GoogleSigninButton.Size.Wide}
             color={GoogleSigninButton.Color.Light}
             onPress={this._signInGoogle}
           />
-          <LoginButton
+        </View>
+        <Text style={{fontFamily: 'bold', color: '#000'}}>OR</Text>
+        <View style={{width: windowwidth * 0.8, height: 50, justifyContent: 'center', backgroundColor: '#4267B2', elevation: 10, margin: 10, borderRadius: 5}}>
+        <LoginButton
+          style={{width: windowwidth * 0.8, maxHeight: 30, flex: 1, backgroundColor: '#4267B2',}}
             publishPermissions={['publish_actions']}
             readPermissions={['public_profile']}
             onLoginFinished={(error, result) => {
@@ -150,7 +136,7 @@ class Login extends Component {
               }
             }}
           />
-        </ImageBackground>
+        </View>
       </View>
     );
   }
@@ -161,41 +147,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  input: {
-    bottom: 20,
-    height: 50,
-    width: 300,
-    borderWidth: 1,
-    margin: 15,
-    borderColor: '#fff',
-    fontSize: 15,
-    alignItems: 'center',
-    padding: 10,
-    borderRadius: 15,
-    color: '#fff',
-  },
-  button: {
-    bottom: 20,
-    height: 50,
-    width: 300,
-    borderWidth: 1,
-    margin: 15,
-    fontSize: 15,
-    alignItems: 'center',
-    padding: 10,
-    borderRadius: 15,
-    backgroundColor: '#000',
-  },
-  text: {
-    fontSize: 20,
-    color: '#fff',
-  },
-  background: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#C5F199',
   },
 });
 
