@@ -12,7 +12,12 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-community/google-signin';
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
+import {
+  LoginButton,
+  AccessToken,
+  GraphRequest,
+  GraphRequestManager,
+} from 'react-native-fbsdk';
 
 GoogleSignin.configure();
 
@@ -23,13 +28,19 @@ class Login extends Component {
       email: '',
       password: '',
     };
-    console.log(AccessToken);
-    AccessToken.getCurrentAccessToken().then(data => {
-      if (data) {
-        this.goToHomePage();
-      }
-    });
   }
+
+  //Create response callback.
+  _responseInfoCallback = (error, result) => {
+    if (error) {
+      alert('Error fetching data: ' + error.toString());
+    } else {
+      this.setState({name: result.name, pic: result.picture.data.url});
+      global.user_name = this.state.name;
+      global.user_photo = this.state.pic;
+    }
+  };
+
   _signInGoogle = async () => {
     try {
       await GoogleSignin.hasPlayServices();
@@ -55,7 +66,25 @@ class Login extends Component {
     }
   };
 
+  componentDidMount() {
+    console.log(AccessToken);
+    AccessToken.getCurrentAccessToken().then(data => {
+      if (data) {
+        this.gotoHompage();
+        global.fb = true;
+      }
+    });
+  }
+
   gotoHompage(accessToken) {
+    // Create a graph request asking for user information with a callback to handle the response.
+    const infoRequest = new GraphRequest(
+      '/me?fields=name,picture',
+      null,
+      this._responseInfoCallback,
+    );
+    // Start the graph request.
+    new GraphRequestManager().addRequest(infoRequest).start();
     this.props.navigation.navigate('App');
   }
 
