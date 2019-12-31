@@ -46,6 +46,7 @@ class HomeScreen extends React.Component {
 
   render() {
     const {navigate} = this.props.navigation;
+
     return (
       <ScrollView style={styles.container}>
         <View >
@@ -60,7 +61,7 @@ class HomeScreen extends React.Component {
         <View style={{paddingTop: 10, paddingBottom: 10, backgroundColor: 'white'}}>
           <Carousal />
         </View>
-        <View>
+        {global.user_name && <View>
           <Banner
             visible={this.state.visible}
             actions={[
@@ -85,7 +86,7 @@ class HomeScreen extends React.Component {
           >
             Help others by sharing your coding round and interview experiences of FTE and interns.
           </Banner>
-        </View>
+        </View>}
         <View style={styles.news}>
             <Subheading style={{fontWeight: 'bold'}}>Latest News</Subheading>      
             <News/>

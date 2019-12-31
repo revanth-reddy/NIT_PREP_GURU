@@ -22,27 +22,36 @@ class SettingsScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      loggedin: true,
-      name: '',
-      pic: '',
+      loggedin: false,
     };
+  }
+  componentDidMount(){
+    if(global.user_name==null)
+    {
+      console.log('no user');
+    }
+    else
+    {
+      // console.log('user is there !');
+      this.setState({loggedin: true});
+    }
   }
 
   Logout = () => {
     LoginManager.logOut();
-    global.user_name = '';
-    global.user_photo =
-      'https://cdn3.iconfinder.com/data/icons/business-round-flat-vol-1-1/36/user_account_profile_avatar_person_student_male-512.png';
-    global.user_email = ' ';
+    global.user_name = null;
+    global.user_photo = '';
+    global.user_email = '';
     global.user_data = '';
     console.log('logout');
     this.setState({loggedin: false});
+    console.log(this.state.loggedin);
   };
 
   render() {
     const {navigate} = this.props.navigation;
-    console.log(global.user_name);
-    if (global.user_name != '' && this.state.loggedin) {
+    // console.log(global.user_name);
+    if (this.state.loggedin) {
       return (
         <ScrollView style={styles.container}>
           <View>
@@ -187,7 +196,7 @@ class SettingsScreen extends React.Component {
               alignItems: 'center',
               justifyContent: 'space-between',
             }}>
-            <Image source={{uri: user_photo}} style={styles.image} />
+            <Image source={require('../assets/user.png')} style={styles.image} />
             <View
               style={{
                 flex: 1,
@@ -222,7 +231,7 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => console.log('issue !')}>
+            <TouchableOpacity onPress={() => console.log('Rate us !')}>
               <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
                 Please Rate us
               </Text>
@@ -236,7 +245,7 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => console.log('issue !')}>
+            <TouchableOpacity onPress={() => console.log('Faqs !')}>
               <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
                 Faqs
               </Text>

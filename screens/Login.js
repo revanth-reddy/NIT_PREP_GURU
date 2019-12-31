@@ -101,7 +101,7 @@ class Login extends Component {
         </Title>
         <View style={{justifyContent: 'center', alignContent: 'center', width: windowwidth * 0.8 , margin: 10, flexDirection: 'row' }}>
         <Text style={{fontSize: 14}}>
-          Sign-In to contribute your interview experience
+          Sign-In for hassle free experience
         </Text>
         </View>
         <View style={{width: windowwidth * 0.8, height: 50, justifyContent: 'center', margin: 20}}>
@@ -137,6 +137,11 @@ class Login extends Component {
             }}
           />
         </View>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('App')}>
+          <Title style={{fontSize: 20,marginBottom: 10}}>
+            Skip > > >
+          </Title>
+        </TouchableOpacity>
       </View>
     );
   }
