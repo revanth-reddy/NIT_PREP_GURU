@@ -103,7 +103,7 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => console.log('issue !')}>
+            <TouchableOpacity onPress={() => console.log('rate !')}>
               <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
                 Please Rate us
               </Text>
@@ -117,7 +117,7 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => console.log('issue !')}>
+            <TouchableOpacity onPress={() => console.log('faqs !')}>
               <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
                 Faqs
               </Text>
