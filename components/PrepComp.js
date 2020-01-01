@@ -6,11 +6,11 @@ import {
   Dimensions,
   TouchableOpacity,
   RefreshControl,
+  ActivityIndicator,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import {withNavigation} from 'react-navigation';
 import axios from 'react-native-axios';
-import AnimatedLoader from 'react-native-animated-loader';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -87,16 +87,8 @@ class PrepComp extends React.Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View>
-          <AnimatedLoader
-            style={{width: 100, height: 100}}
-            visible={true}
-            overlayColor="rgba(255,255,255)"
-            source={require('./loader.json')}
-            animationStyle={styles.lottie}
-            animationType="fade"
-            speed={2}
-          />
+        <View style={{marginTop: 20}}>
+          <ActivityIndicator size="large" />
         </View>
       );
     }

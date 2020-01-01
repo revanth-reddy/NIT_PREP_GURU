@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
   ScrollView,
   Dimensions,
+  ActivityIndicator,
   RefreshControl,
 } from 'react-native';
 import {FlatGrid} from 'react-native-super-grid';
 import axios from 'react-native-axios';
 import {Title, Subheading} from 'react-native-paper';
 import {withNavigation} from 'react-navigation';
-import AnimatedLoader from 'react-native-animated-loader';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 class Fte extends Component {
@@ -85,16 +85,8 @@ class Fte extends Component {
     this.state.url = this.props.url;
     if (this.state.isLoading) {
       return (
-        <View>
-          <AnimatedLoader
-            style={{width: 100, height: 100}}
-            visible={true}
-            overlayColor="rgba(255,255,255)"
-            source={require('./loader.json')}
-            animationStyle={styles.lottie}
-            animationType="fade"
-            speed={2}
-          />
+        <View style={{marginTop: 20}}>
+          <ActivityIndicator size="large" />
         </View>
       );
     }
