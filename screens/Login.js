@@ -1,17 +1,14 @@
-import React, {useState, Component} from 'react';
+import React, {Component} from 'react';
 import {
   View,
   StyleSheet,
-  TextInput,
   Text,
   TouchableOpacity,
-  ImageBackground,
   Dimensions,
 } from 'react-native';
 import {
   GoogleSignin,
   GoogleSigninButton,
-  statusCodes,
 } from '@react-native-community/google-signin';
 import {
   LoginButton,
@@ -19,12 +16,11 @@ import {
   GraphRequest,
   GraphRequestManager,
 } from 'react-native-fbsdk';
-import { Paragraph, Title } from 'react-native-paper';
+import {Title} from 'react-native-paper';
 
 GoogleSignin.configure();
 
 const windowwidth = Dimensions.get('window').width;
-const windowheight = Dimensions.get('window').height;
 
 class Login extends Component {
   constructor() {

@@ -1,10 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
-import {Appbar, Subheading, Title} from 'react-native-paper';
+import {Subheading, Title} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import Autolink from 'react-native-autolink';
 
-const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 export default class Exp extends React.Component {
   constructor(props) {
     super(props);

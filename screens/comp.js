@@ -1,8 +1,6 @@
-import React, {Component, useState} from 'react';
-import {StyleSheet, View, Picker, ScrollView, Alert, Text} from 'react-native';
-import {Container, Header, Content, Tab, Tabs} from 'native-base';
-import {Surface, Appbar, TextInput, Button, Headline} from 'react-native-paper';
-import {yellow} from 'ansi-colors';
+import React, {Component} from 'react';
+import {Container, Tab, Tabs} from 'native-base';
+import {Appbar} from 'react-native-paper';
 import Fte from '../components/Fte';
 import Intern from '../components/Intern';
 

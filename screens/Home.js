@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image, ScrollView, BackHandler} from 'react-native';
-import { Appbar, Banner, Subheading, Divider } from 'react-native-paper';
+import {StyleSheet, View, Image, ScrollView, RefreshControl} from 'react-native';
+import { Appbar, Banner, Subheading } from 'react-native-paper';
 import Carousal from '../components/Carousel.js';
 import News from '../components/News';
 import OneSignal from 'react-native-onesignal'; // Import package from node modules
@@ -8,6 +8,7 @@ import OneSignal from 'react-native-onesignal'; // Import package from node modu
 class HomeScreen extends React.Component {
   state = {
     visible: true,
+    refreshing: false,
   };
   
   constructor(properties) {
@@ -44,11 +45,24 @@ class HomeScreen extends React.Component {
     console.log('Device info: ', device);
   }
 
+  _onRefresh() {
+    this.setState({refreshing: true});
+    setTimeout(() => {
+      this.setState({refreshing: false});
+    }, this.forceUpdate());
+  }
+
   render() {
     const {navigate} = this.props.navigation;
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container}
+      refreshControl={
+        <RefreshControl
+          refreshing={this.state.refreshing}
+          onRefresh={this._onRefresh.bind(this)}
+        />
+      }>
         <View >
           <Appbar.Header style={{backgroundColor: '#3BAD87'}}>
             <Appbar.Content
@@ -61,32 +75,6 @@ class HomeScreen extends React.Component {
         <View style={{paddingTop: 10, paddingBottom: 10, backgroundColor: 'white'}}>
           <Carousal />
         </View>
-        {global.user_name && <View>
-          <Banner
-            visible={this.state.visible}
-            actions={[
-              {
-                label: 'Contribute',
-                onPress: () => navigate('Help'),
-              },
-              {
-                label: 'Not Now',
-                onPress: () => this.setState({ visible: false }),
-              },
-            ]}
-            icon={({ size }) =>
-              <Image
-                source={require('../assets/contribute.png')}
-                style={{
-                  width: size,
-                  height: size,
-                }}
-              />
-            }
-          >
-            Help others by sharing your coding round and interview experiences of FTE and interns.
-          </Banner>
-        </View>}
         <View style={styles.news}>
             <Subheading style={{fontWeight: 'bold'}}>Latest News</Subheading>      
             <News/>

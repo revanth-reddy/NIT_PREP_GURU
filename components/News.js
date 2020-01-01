@@ -1,11 +1,10 @@
 import React from 'react';
 import axios from "react-native-axios";
-import { Text, View, StyleSheet, Linking, TouchableOpacity } from 'react-native';
+import { Text, View, Linking, TouchableOpacity } from 'react-native';
 import { Divider } from 'react-native-paper';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class News extends React.Component {
-  
   constructor(props) {
     super(props);
     this.state = {

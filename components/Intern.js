@@ -4,7 +4,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  ActivityIndicator,
   RefreshControl,
   Dimensions,
 } from 'react-native';

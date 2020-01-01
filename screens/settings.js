@@ -9,14 +9,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Appbar, Divider} from 'react-native-paper';
-import {
-  GraphRequest,
-  GraphRequestManager,
-  LoginManager,
-} from 'react-native-fbsdk';
+import {LoginManager} from 'react-native-fbsdk';
 
 const windowwidth = Dimensions.get('window').width;
-const windowheight = Dimensions.get('window').height;
 
 class SettingsScreen extends React.Component {
   constructor() {
@@ -89,7 +84,7 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => navigate('Login')}>
+            <TouchableOpacity onPress={() => navigate('Help')}>
               <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
                 Contribute !
               </Text>

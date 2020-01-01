@@ -2,7 +2,6 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  Dimensions,
   ScrollView,
   StatusBar,
   Text,
@@ -10,7 +9,6 @@ import {
 import {Appbar} from 'react-native-paper';
 import PrepComp from '../components/PrepComp';
 
-const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
 class Prep extends React.Component {
   constructor() {

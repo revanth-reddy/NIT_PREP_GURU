@@ -5,13 +5,10 @@ import {
   Text,
   Dimensions,
   TouchableOpacity,
-  ActivityIndicator,
   RefreshControl,
-  StatusBar,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import {Appbar} from 'react-native-paper';
-import {withNavigation, SafeAreaView} from 'react-navigation';
+import {withNavigation} from 'react-navigation';
 import axios from 'react-native-axios';
 import AnimatedLoader from 'react-native-animated-loader';
 
