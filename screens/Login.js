@@ -137,7 +137,7 @@ class Login extends Component {
             }}
           />
         </View>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('App')}>
+        <TouchableOpacity onPress={() => this.props.navigation.replace('App')}>
           <Title style={{fontSize: 20,marginBottom: 10}}>
             Skip > > >
           </Title>

@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     borderRadius: 15,
     padding: 15,
-    height: screenHeight * 0.3,
+    height: 250,
     width: screenWidth * 0.46,
     elevation: 20,
   },
