@@ -102,6 +102,9 @@ class PrepComp extends React.Component {
           sliderHeight={screenHeight * 0.8}
           itemWidth={screenWidth - 60}
           vertical={true}
+          firstItem={1}
+          activeSlideOffset={50}
+          enableMomentum={true}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}

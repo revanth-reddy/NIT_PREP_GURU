@@ -48,7 +48,7 @@ class SettingsScreen extends React.Component {
     // console.log(global.user_name);
     if (this.state.loggedin) {
       return (
-        <ScrollView style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator = {false}>
           <View>
             <Appbar.Header style={{backgroundColor: '#3BAD87'}}>
               <Appbar.Content
@@ -188,7 +188,7 @@ class SettingsScreen extends React.Component {
       );
     } else {
       return (
-        <ScrollView style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator = {false}>
           <View>
             <Appbar.Header style={{backgroundColor: '#3BAD87'}}>
               <Appbar.Content
