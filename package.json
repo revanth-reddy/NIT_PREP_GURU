@@ -19,6 +19,7 @@
     "react-native": "0.61.5",
     "react-native-animated-loader": "^0.0.8",
     "react-native-app-intro-slider": "^3.0.0",
+    "react-native-autolink": "^1.9.1",
     "react-native-axios": "^0.17.1",
     "react-native-fbsdk": "^1.1.1",
     "react-native-gesture-handler": "^1.5.2",

@@ -1392,6 +1392,13 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+autolinker@^3.11.1:
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/autolinker/-/autolinker-3.11.1.tgz#aa4f910371df091b0d714d8d6e700d53f357ce95"
+  integrity sha512-6sAmetStorjXvwmV8MBxI5DGICHKD1B5EjdkIrq34X6YBDN6jj54EUHnoHgNqmNCclcf8c409zuVMNy449u80g==
+  dependencies:
+    tslib "^1.9.3"
+
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -5333,6 +5340,14 @@ react-native-app-intro-slider@^3.0.0:
   resolved "https://registry.yarnpkg.com/react-native-app-intro-slider/-/react-native-app-intro-slider-3.0.0.tgz#c3620b967503ce410b3d767252392bb6fb2edf97"
   integrity sha512-2XXUYnSeMYZTLhdRYHSwv8mhoyuEaYxmQfXrWQInH1QvjsnJtKgvORI3bJuJN+tNPg3aut6JYYCNOFsI5of32A==
 
+react-native-autolink@^1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/react-native-autolink/-/react-native-autolink-1.9.1.tgz#829adc009f976adf2b73dffba78e636e60bcf7e7"
+  integrity sha512-AoRXswIYqbZRCLiNtWOBGZYYWbLD6sJ3GsR+4O210IUQO7n2/cCr4ql4v/qq0h7EbdoV8XS/4/Zlm5AtIL6htw==
+  dependencies:
+    autolinker "^3.11.1"
+    prop-types "^15.7.2"
+
 react-native-axios@^0.17.1:
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/react-native-axios/-/react-native-axios-0.17.1.tgz#44292950aa07ceee2e4bd349106ff773bef81f8f"
@@ -6485,7 +6500,7 @@ tr46@^1.0.1:
   dependencies:
     punycode "^2.1.0"
 
-tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
   integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==

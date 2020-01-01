@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import {Appbar, Subheading, Title} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
+import Autolink from 'react-native-autolink';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 export default class Exp extends React.Component {
@@ -86,7 +87,12 @@ export default class Exp extends React.Component {
           <View
             style={[styles.dataContainer, {marginTop: 20}, {marginBottom: 25}]}>
             <Title style={styles.title}>Links :</Title>
-            <Text style={styles.subHeading}>{problems}</Text>
+            <Text style={styles.subHeading}>
+              <Autolink
+                text={problems}
+                showAlert={true}
+                />
+            </Text>
           </View>
         </ScrollView>
       </View>

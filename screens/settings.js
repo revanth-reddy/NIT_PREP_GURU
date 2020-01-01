@@ -89,6 +89,20 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => navigate('Login')}>
+              <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
+                Contribute !
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Divider
+            style={{
+              height: 1,
+              marginLeft: windowwidth / 25,
+              marginRight: windowwidth / 25,
+            }}
+          />
+          <View style={{alignItems: 'center'}}>
             <TouchableOpacity onPress={() => console.log('issue !')}>
               <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
                 Have an Issue?
@@ -132,7 +146,7 @@ class SettingsScreen extends React.Component {
           />
           <View style={{alignItems: 'center'}}>
             <TouchableOpacity onPress={() => this.Logout()}>
-              <Text style={{fontSize: 20, marginBottom: 100, marginTop: 20}}>
+              <Text style={{fontSize: 20, marginBottom: 50, marginTop: 20}}>
                 Logout
               </Text>
             </TouchableOpacity>
@@ -146,6 +160,7 @@ class SettingsScreen extends React.Component {
                 flex: 1,
                 flexDirection: 'row',
                 justifyContent: 'space-evenly',
+                marginBottom: 10,
               }}>
               <Image
                 source={{
@@ -259,7 +274,7 @@ class SettingsScreen extends React.Component {
           />
           <View style={{alignItems: 'center'}}>
             <TouchableOpacity onPress={() => navigate('Login')}>
-              <Text style={{fontSize: 20, marginBottom: 100, marginTop: 20}}>
+              <Text style={{fontSize: 20, marginBottom: 50, marginTop: 20}}>
                 Login !
               </Text>
             </TouchableOpacity>
