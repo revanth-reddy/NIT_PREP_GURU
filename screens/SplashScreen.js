@@ -24,16 +24,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFB74D',
+    backgroundColor: '#02a8a8',
   },
   image: {
     height: 300,
-    width: 200,
+    width: 300,
   },
   text: {
     fontWeight: 'bold',
     color: '#455A64',
     fontSize: 30,
+    marginTop: 20,
     marginBottom: 20,
   },
 });

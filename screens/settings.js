@@ -174,7 +174,6 @@ class SettingsScreen extends React.Component {
               />
             </TouchableOpacity>
           </View>
-          <View style={{height: 10000}} />
         </ScrollView>
       );
     } else {
@@ -302,7 +301,6 @@ class SettingsScreen extends React.Component {
               />
             </TouchableOpacity>
           </View>
-          <View style={{height: 10000}} />
         </ScrollView>
       );
     }
@@ -313,7 +311,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    height: 1000,
   },
   image: {
     width: windowwidth / 4,
