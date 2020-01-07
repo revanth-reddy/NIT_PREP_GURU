@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Image, ScrollView, RefreshControl} from 'react-native';
+import {StyleSheet, View, Image, ScrollView, RefreshControl, BackHandler, Alert} from 'react-native';
 import { Appbar, Banner, Subheading } from 'react-native-paper';
 import Carousal from '../components/Carousel.js';
 import News from '../components/News';
@@ -18,18 +18,38 @@ class HomeScreen extends React.Component {
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
     OneSignal.addEventListener('ids', this.onIds);
-    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-  }
-  handleBackButtonClick() {
-    this.props.navigation.goBack(null);
-    return true;
   }
   componentWillUnmount() {
     OneSignal.removeEventListener('received', this.onReceived);
     OneSignal.removeEventListener('opened', this.onOpened);
     OneSignal.removeEventListener('ids', this.onIds);
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton = () => {
+    if (this.props.navigation.isFocused()) {
+      Alert.alert(
+      "Exit App",
+      "Do you want to exit?",
+      [
+        {
+          text: "No",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Yes", onPress: () => BackHandler.exitApp() }
+      ],
+      { cancelable: false }
+      );
+      return true;
+  }
+  else
+    return false;
+  };
   onReceived(notification) {
     console.log("Notification received: ", notification);
   }
