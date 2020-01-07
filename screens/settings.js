@@ -38,9 +38,9 @@ class SettingsScreen extends React.Component {
     global.user_photo = '';
     global.user_email = '';
     global.user_data = '';
-    console.log('logout');
+    // console.log('logout');
     this.setState({loggedin: false});
-    console.log(this.state.loggedin);
+    // console.log(this.state.loggedin);
   };
 
   render() {
