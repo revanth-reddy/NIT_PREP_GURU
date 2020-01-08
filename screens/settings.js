@@ -7,6 +7,7 @@ import {
   Text,
   Dimensions,
   TouchableOpacity,
+  Linking,
 } from 'react-native';
 import {Appbar, Divider} from 'react-native-paper';
 import {LoginManager} from 'react-native-fbsdk';
@@ -73,7 +74,6 @@ class SettingsScreen extends React.Component {
                 width: (windowwidth * 3) / 4,
               }}>
               <Text style={styles.username}>{global.user_name}</Text>
-              <Text style={{textAlign: 'center'}}>{global.user_email}</Text>
             </View>
           </View>
           <Divider
@@ -98,7 +98,9 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => console.log('issue !')}>
+            <TouchableOpacity onPress={() => {
+              Linking.openURL('mailto:revanth@ccanitd.in')
+            }}>
               <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
                 Have an Issue?
               </Text>
@@ -112,7 +114,9 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => console.log('rate !')}>
+            <TouchableOpacity onPress={() => {
+              Linking.openURL("market://details?id=com.dronacharya");
+           }}>
               <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
                 Please Rate us
               </Text>
@@ -226,7 +230,9 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => console.log('issue !')}>
+            <TouchableOpacity onPress={() => {
+                Linking.openURL('mailto:revanth@ccanitd.in')
+            }}>
               <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
                 Have an Issue?
               </Text>
@@ -240,7 +246,9 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => console.log('Rate us !')}>
+            <TouchableOpacity onPress={() => {
+                Linking.openURL("market://details?id=com.dronacharya");
+            }}>
               <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
                 Please Rate us
               </Text>
