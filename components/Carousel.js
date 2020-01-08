@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "react-native-axios";
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
-import { Text, View, Image, Dimensions, StyleSheet } from 'react-native';
+import { Text, View, Image, Dimensions, StyleSheet, Linking, TouchableOpacity } from 'react-native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 
@@ -61,7 +61,9 @@ class Carousal extends React.Component {
 
   _renderItem ({item, index}, parallaxProps) {
     return (
-        <View style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={() => {
+          Linking.openURL(`${item.link}`);
+            }}>
             <ParallaxImage
                 source={{ uri: item.thumbnail }}
                 containerStyle={styles.imageContainer}
@@ -69,7 +71,7 @@ class Carousal extends React.Component {
                 parallaxFactor={0.4}
                 {...parallaxProps}
             />
-        </View>
+        </TouchableOpacity>
     );
 }
 
