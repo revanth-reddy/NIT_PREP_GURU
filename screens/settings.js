@@ -130,7 +130,7 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => console.log('faqs !')}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('FAQ')}>
               <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
                 Faqs
               </Text>
@@ -262,7 +262,7 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => console.log('Faqs !')}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('FAQ')}>
               <Text style={{fontSize: 20, marginBottom: 20, marginTop: 20}}>
                 Faqs
               </Text>

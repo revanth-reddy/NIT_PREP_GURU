@@ -8,6 +8,7 @@ import HelpScreen from './screens/Contribute';
 import CompScreen from './screens/comp';
 import Exp from './screens/Exp';
 import Prep from './screens/Prep';
+import FAQ from './screens/FAQ';
 
 const navigator = createStackNavigator(
   {
@@ -19,6 +20,7 @@ const navigator = createStackNavigator(
     Comp: {screen: CompScreen},
     Exp: Exp,
     Prep: {screen: Prep},
+    FAQ: FAQ,
   },
   {
     intialRouteName: 'SplashScreen',
