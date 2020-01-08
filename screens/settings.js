@@ -268,7 +268,7 @@ class SettingsScreen extends React.Component {
             }}
           />
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => navigate('Login')}>
+            <TouchableOpacity onPress={() => this.props.navigation.replace('Login')}>
               <Text style={{fontSize: 20, marginBottom: 50, marginTop: 20}}>
                 Login !
               </Text>
