@@ -13,13 +13,15 @@ class FAQ extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
-        {this.state.visible && <ActivityIndicator size="large" />}
-        <WebView
-          onLoad={() => this.hideSpinner()}
-          style={{flex: 1}}
-          source={{uri: 'https://revanthreddy739245.typeform.com/to/Yncxq4'}}
-        />
+      <View style={{flex: 1, backgroundColor: '#5a1d81'}}>
+        <View style={{flex: 1, backgroundColor: '#5a1d81'}}>
+          {this.state.visible && <ActivityIndicator size="large" style={{marginTop: 20}} />}
+          <WebView
+            onLoad={() => this.hideSpinner()}
+            style={{flex: 1, backgroundColor: '#5a1d81'}}
+            source={{uri: 'https://revanthreddy739245.typeform.com/to/Yncxq4'}}
+          />
+        </View>
       </View>
     );
   }
