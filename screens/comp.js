@@ -20,8 +20,8 @@ export default class CompScreen extends Component {
     const company = JSON.parse(
       JSON.stringify(navigation.getParam('title', '')),
     );
-    this.state.fLink = 'http://52.66.210.173/' + 'FTE/' + company + '/';
-    this.state.iLink = 'http://52.66.210.173/' + 'INTERN/' + company + '/';
+    this.state.fLink = 'http://13.59.111.72/' + 'FTE/' + company + '/';
+    this.state.iLink = 'http://13.59.111.72/' + 'INTERN/' + company + '/';
     return (
       <Container>
         <Appbar.Header style={{backgroundColor: '#3BAD87'}}>

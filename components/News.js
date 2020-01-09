@@ -15,7 +15,7 @@ class News extends React.Component {
   componentDidMount() {
     axios({
       method: "get",
-      url: "http://52.66.210.173/news/",
+      url: "http://13.59.111.72/news/",
       auth: {
         username: "admin",
         password: "admin123"

@@ -34,7 +34,7 @@ class Carousal extends React.Component {
   componentDidMount() {
     axios({
       method: "get",
-      url: "http://52.66.210.173/slideshow/",
+      url: "http://13.59.111.72/slideshow/",
       auth: {
         username: "admin",
         password: "admin123"

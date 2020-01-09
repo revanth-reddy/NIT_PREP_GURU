@@ -22,7 +22,7 @@ class HelpScreen extends React.Component {
         {
             axios({
                 method: 'post',
-                url: `http://52.66.210.173/exp/`,
+                url: `http://13.59.111.72/exp/`,
                 data: {
                   name: this.state.company,
                   job_title: this.state.job,

@@ -32,7 +32,7 @@ class PrepComp extends React.Component {
   getData() {
     axios({
       method: 'get',
-      url: 'http://52.66.210.173/companies/',
+      url: 'http://13.59.111.72/companies/',
       auth: {
         username: 'admin',
         password: 'admin123',
