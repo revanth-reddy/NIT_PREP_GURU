@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, Picker, ScrollView, Alert} from 'react-native';
-import { Surface, Appbar, TextInput, Button, Headline,} from 'react-native-paper';
+import {StyleSheet, View, Picker, ScrollView, Alert,} from 'react-native';
+import { Surface, Appbar, TextInput, Button, Headline, ActivityIndicator} from 'react-native-paper';
 import axios from 'react-native-axios';
 
 class HelpScreen extends React.Component {
@@ -15,9 +15,11 @@ class HelpScreen extends React.Component {
         credits: '',
         hide: true,
         accept: false,
+        progress: false,
         };
 
     display = () => {
+        this.setState({progress: true});
         if(this.state.company!='' & this.state.job!='' & this.state.year!='' & this.state.type!='' & this.state.exp!='')
         {
             axios({
@@ -44,7 +46,8 @@ class HelpScreen extends React.Component {
                 .catch(function(error) {
                   console.log(error);
                 });
-
+            
+            this.setState({progress: false});
             Alert.alert(
                 'Thank You',
                 'Many thanks for contributing !!!, We are processing your information and it will be on app shortly.',
@@ -56,6 +59,7 @@ class HelpScreen extends React.Component {
         }
         else
         {
+            this.setState({progress: false});
             Alert.alert(
                 'Uh-Ooh !',
                 'Kindly fill all the details in the form ',
@@ -166,9 +170,10 @@ class HelpScreen extends React.Component {
                             mode = 'outlined'
                             onChangeText={credits => this.setState({ credits })}
                         />
-                        <Button icon="rocket" style={{marginTop: 10}} mode="contained" onPress={() => this.display()}>
+                    { this.state.progress && <ActivityIndicator size="small" style={{marginTop: 10}} />}
+                    { !this.state.progress && <Button icon="rocket" style={{marginTop: 10}} mode="contained" onPress={() => this.display()}>
                             Submit
-                        </Button>
+                        </Button>}
                     </Surface>
                 </ScrollView>
             </View>
