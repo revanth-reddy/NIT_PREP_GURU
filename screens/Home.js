@@ -4,6 +4,7 @@ import { Appbar, Banner, Subheading } from 'react-native-paper';
 import Carousal from '../components/Carousel.js';
 import News from '../components/News';
 import OneSignal from 'react-native-onesignal'; // Import package from node modules
+import OfflineNotice from '../components/OfflineNotice';
 
 class HomeScreen extends React.Component {
   state = {
@@ -33,7 +34,7 @@ class HomeScreen extends React.Component {
   handleBackButton = () => {
     if (this.props.navigation.isFocused()) {
       Alert.alert(
-      "Exit App",
+      "Exit App !",
       "Do you want to exit?",
       [
         {
@@ -91,6 +92,9 @@ class HomeScreen extends React.Component {
               style={{alignItems: "center"}}
             />
           </Appbar.Header>
+        </View>
+        <View style={{paddingTop: 15, paddingBottom: 15}}>
+          <OfflineNotice />
         </View>
         <View style={{paddingTop: 10, paddingBottom: 10, backgroundColor: 'white'}}>
           <Carousal />
