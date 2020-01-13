@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "react-native-axios";
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
-import { Text, View, Image, Dimensions, StyleSheet, Linking, TouchableOpacity } from 'react-native';
+import { Text, View, Image, Dimensions, StyleSheet, Linking, TouchableOpacity,ActivityIndicator } from 'react-native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 
@@ -28,6 +28,7 @@ class Carousal extends React.Component {
         }
       ],
       dataSource: [],
+      isLoading: true,
     };
   }
 
@@ -76,6 +77,12 @@ class Carousal extends React.Component {
 }
 
   render() {
+    if (this.state.isLoading)
+      return (
+        <View style={{width: screenWidth, height: screenWidth / 2, alignItems: 'center', justifyContent: 'center'}}>
+          <ActivityIndicator size="large" />
+        </View>
+      );
     return (
       <Carousel
         sliderWidth={screenWidth}

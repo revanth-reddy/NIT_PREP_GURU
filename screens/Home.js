@@ -6,6 +6,7 @@ import News from '../components/News';
 import OneSignal from 'react-native-onesignal'; // Import package from node modules
 import OfflineNotice from '../components/OfflineNotice';
 import NetInfo from '@react-native-community/netinfo';
+import {AccessToken, GraphRequest, GraphRequestManager} from 'react-native-fbsdk';
 
 class HomeScreen extends React.Component {
   state = {
@@ -24,14 +25,44 @@ class HomeScreen extends React.Component {
     OneSignal.addEventListener('ids', this.onIds);
   }
 
-  componentDidMount() {
-    
+  //Create response callback.
+  _responseInfoCallback = (error, result) => {
+    if (error) {
+//      alert('Error fetching data: ' + error.toString());
+    } else {
+      this.setState({name: result.name, pic: result.picture.data.url});
+      global.user_name = this.state.name;
+      global.user_photo = this.state.pic;
+    }
+  };
+
+  loadFbDetails(accessToken) {
+    // Create a graph request asking for user information with a callback to handle the response.
+    const infoRequest = new GraphRequest(
+      '/me?fields=name,picture',
+      null,
+      this._responseInfoCallback,
+    );
+    // Start the graph request.
+    new GraphRequestManager().addRequest(infoRequest).start();
+  }
+
+  componentDidMount() { 
     NetInfo.addEventListener(state => {
       console.log("Connection type", state.type);
       console.log("Is connected?", state.isConnected);
       this.setState({isConnected: state.isConnected});
-      if (this.state.isConnected)
+      if (this.state.isConnected) {
         this.setState({connection: this.state.isConnected});
+      }
+      if (this.state.connection){
+        AccessToken.getCurrentAccessToken().then(data => {
+          if (data) {
+            global.fb = true;
+            this.loadFbDetails();
+          }
+        });
+      }
     });
   }
 

@@ -30,7 +30,7 @@ class Login extends Component {
   //Create response callback.
   _responseInfoCallback = (error, result) => {
     if (error) {
-      alert('Error fetching data: ' + error.toString());
+ //     alert('Error fetching data: ' + error.toString());
     } else {
       this.setState({name: result.name, pic: result.picture.data.url});
       global.user_name = this.state.name;

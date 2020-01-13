@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "react-native-axios";
-import { Text, View, Linking, TouchableOpacity } from 'react-native';
+import { Text, View, Linking, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Divider } from 'react-native-paper';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -9,6 +9,7 @@ class News extends React.Component {
     super(props);
     this.state = {
       dataSource: [],
+      isLoading: true,
     };
   }
 
@@ -31,7 +32,8 @@ class News extends React.Component {
         }
         // console.log(ob);
         this.setState({
-          dataSource: ob
+          dataSource: ob,
+          isLoading: false,
         });
       })
       .catch(error => {
@@ -40,6 +42,10 @@ class News extends React.Component {
   }
 
   render() {
+    if(this.state.isLoading)
+      return(
+        <ActivityIndicator size="large" />
+      )
     return (
         <View>
             {

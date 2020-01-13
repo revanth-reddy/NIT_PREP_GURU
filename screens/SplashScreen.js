@@ -1,19 +1,18 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 
 export default class SplashScreen extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.props.navigation.replace('Login');
-    }, 2000);
+    }, 1000);
   }
 
   render() {
     return (
       <View style={styles.viewStyle}>
         <Image style={styles.image} source={require('../assets/logo.png')} />
-        <Text style={styles.text}>Let's Go</Text>
-        <ActivityIndicator size="large" color="#455A64" />
+        <Text style={styles.text}>Dronacharya</Text>
       </View>
     );
   };
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: 'bold',
     color: '#455A64',
-    fontSize: 30,
+    fontSize: 40,
     marginTop: 20,
     marginBottom: 20,
   },
