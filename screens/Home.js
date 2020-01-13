@@ -5,11 +5,14 @@ import Carousal from '../components/Carousel.js';
 import News from '../components/News';
 import OneSignal from 'react-native-onesignal'; // Import package from node modules
 import OfflineNotice from '../components/OfflineNotice';
+import NetInfo from '@react-native-community/netinfo';
 
 class HomeScreen extends React.Component {
   state = {
     visible: true,
     refreshing: false,
+    isConnected: true,
+    connection: false,
   };
   
   constructor(properties) {
@@ -20,6 +23,18 @@ class HomeScreen extends React.Component {
     OneSignal.addEventListener('opened', this.onOpened);
     OneSignal.addEventListener('ids', this.onIds);
   }
+
+  componentDidMount() {
+    
+    NetInfo.addEventListener(state => {
+      console.log("Connection type", state.type);
+      console.log("Is connected?", state.isConnected);
+      this.setState({isConnected: state.isConnected});
+      if (this.state.isConnected)
+        this.setState({connection: this.state.isConnected});
+    });
+  }
+
   componentWillUnmount() {
     OneSignal.removeEventListener('received', this.onReceived);
     OneSignal.removeEventListener('opened', this.onOpened);
@@ -67,10 +82,13 @@ class HomeScreen extends React.Component {
   }
 
   _onRefresh() {
-    this.setState({refreshing: true});
-    setTimeout(() => {
-      this.setState({refreshing: false});
-    }, this.forceUpdate());
+    if (this.state.isConnected) {
+      this.setState({refreshing: true});
+      setTimeout(() => {
+        this.setState({refreshing: false, connection: false});
+        this.setState({connection: true});
+      }, this.forceUpdate());
+    }
   }
 
   render() {
@@ -96,13 +114,14 @@ class HomeScreen extends React.Component {
         <View style={{paddingTop: 15, paddingBottom: 15}}>
           <OfflineNotice />
         </View>
-        <View style={{paddingTop: 10, paddingBottom: 10, backgroundColor: 'white'}}>
+      { this.state.connection && <View style={{paddingTop: 10, paddingBottom: 10, backgroundColor: 'white'}}>
           <Carousal />
-        </View>
-        <View style={styles.news}>
+        </View>}
+        {this.state.connection && <View style={styles.news}>
             <Subheading style={{fontWeight: 'bold'}}>Latest News</Subheading>      
             <News/>
-        </View>
+        </View>}
+
       </ScrollView>
     );
   }
