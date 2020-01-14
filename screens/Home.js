@@ -145,7 +145,7 @@ class HomeScreen extends React.Component {
         <View style={{paddingTop: 15, paddingBottom: 15}}>
           <OfflineNotice />
         </View>
-      { this.state.connection && <View style={{paddingTop: 10, paddingBottom: 10, backgroundColor: 'white'}}>
+      { this.state.connection && <View style={{paddingTop: 10, paddingBottom: 10,}}>
           <Carousal />
         </View>}
         {this.state.connection && <View style={styles.news}>
